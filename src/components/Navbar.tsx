@@ -1,69 +1,104 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingCart, User, Menu, X } from 'lucide-react';
-import { useState } from 'react';
-import Image from 'next/image';
+import { ShoppingCart, User, Menu, X, Bell, Search, TrendingUp } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navItems = [
+    { href: '/', label: 'Home' },
+    { href: '/products', label: 'Browse' },
+    { href: '/categories', label: 'Categories' },
+    { href: '/trending', label: 'Trending', icon: <TrendingUp size={16} /> },
+    { href: '/sell', label: 'Sell', highlight: true },
+    { href: '/deals', label: 'Deals' },
+  ];
 
   return (
-    <nav className="fixed top-0 w-full bg-white shadow-md z-50">
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg py-2' : 'bg-transparent py-4'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <img
-               src={'logo.png'}
-               alt='logo'
+            <Link href="/" className="flex items-center space-x-3">
+             <img 
+                src={'logo.png'}  
+                alt='logo'
                 className="h-8"
-               />
+              />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-primary font-medium">
-              Home
-            </Link>
-            <Link href="/products" className="text-gray-700 hover:text-primary font-medium">
-              Products
-            </Link>
-            <Link href="/categories" className="text-gray-700 hover:text-primary font-medium">
-              Categories
-            </Link>
-            <Link href="/sell" className="text-gray-700 hover:text-primary font-medium">
-              Sell
-            </Link>
-            <Link href="/about" className="text-gray-700 hover:text-primary font-medium">
-              About
-            </Link>
+          <div className="hidden lg:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                  pathname === item.href
+                    ? 'text-primary bg-primary/10'
+                    : 'text-gray-700 hover:text-primary hover:bg-gray-100'
+                } ${item.highlight ? 'bg-primary text-white hover:bg-primary/90' : ''}`}
+              >
+                {item.icon && <span>{item.icon}</span>}
+                <span>{item.label}</span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Search Bar */}
+          <div className="hidden lg:flex items-center bg-gray-100 rounded-full px-4 py-2 w-64">
+            <Search size={18} className="text-gray-400 mr-2" />
+            <input
+              type="text"
+              placeholder="Search anything..."
+              className="bg-transparent w-full outline-none text-sm"
+            />
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-4">
-            <button className="p-2 text-gray-600 hover:text-primary">
+          <div className="hidden lg:flex items-center space-x-3">
+            <button className="p-2 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-full">
+              <Bell size={20} />
+            </button>
+            <button className="p-2 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-full">
               <ShoppingCart size={20} />
             </button>
-            <Link
-              href="/register"
-              className="btn-primary px-4 py-2 text-sm"
-            >
-              Start Selling
-            </Link>
-            <Link
-              href="/login"
-              className="btn-outline px-4 py-2 text-sm"
-            >
-              Login
-            </Link>
+            <div className="relative group">
+              <button className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-full">
+                <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                  <User size={16} className="text-white" />
+                </div>
+              </button>
+              <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <Link href="/dashboard" className="block px-4 py-2 hover:bg-gray-50">Dashboard</Link>
+                <Link href="/messages" className="block px-4 py-2 hover:bg-gray-50">Messages</Link>
+                <Link href="/settings" className="block px-4 py-2 hover:bg-gray-50">Settings</Link>
+                <div className="border-t my-2"></div>
+                <Link href="/logout" className="block px-4 py-2 hover:bg-gray-50 text-red-500">Logout</Link>
+              </div>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -72,59 +107,57 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link
-                href="/"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link
-                href="/products"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Products
-              </Link>
-              <Link
-                href="/categories"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Categories
-              </Link>
-              <Link
-                href="/sell"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sell
-              </Link>
-              <Link
-                href="/about"
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </Link>
-              <div className="pt-4 border-t">
+          <div className="lg:hidden mt-4 bg-white rounded-2xl shadow-2xl p-4 animate-slide-up">
+            {/* Mobile Search */}
+            <div className="flex items-center bg-gray-100 rounded-xl px-4 py-3 mb-4">
+              <Search size={18} className="text-gray-400 mr-2" />
+              <input
+                type="text"
+                placeholder="Search anything..."
+                className="bg-transparent w-full outline-none"
+              />
+            </div>
+
+            <div className="space-y-1">
+              {navItems.map((item) => (
                 <Link
-                  href="/register"
-                  className="block w-full text-center btn-primary mb-2"
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center justify-between px-4 py-3 rounded-lg font-medium ${
+                    pathname === item.href
+                      ? 'text-primary bg-primary/10'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  } ${item.highlight ? 'bg-primary text-white hover:bg-primary/90' : ''}`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Start Selling
+                  <div className="flex items-center space-x-3">
+                    {item.icon && <span>{item.icon}</span>}
+                    <span>{item.label}</span>
+                  </div>
+                  <span className="text-gray-400">→</span>
                 </Link>
-                <Link
-                  href="/login"
-                  className="block w-full text-center btn-outline"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Login
-                </Link>
-              </div>
+              ))}
+            </div>
+
+            <div className="border-t mt-4 pt-4 space-y-2">
+              <button className="w-full flex items-center justify-center space-x-2 p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                <Bell size={20} />
+                <span>Notifications</span>
+              </button>
+              <button className="w-full flex items-center justify-center space-x-2 p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                <ShoppingCart size={20} />
+                <span>Cart (3)</span>
+              </button>
+              <Link
+                href="/profile"
+                className="w-full flex items-center justify-center space-x-2 p-3 text-gray-600 hover:bg-gray-100 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                  <User size={16} className="text-white" />
+                </div>
+                <span>Profile</span>
+              </Link>
             </div>
           </div>
         )}
