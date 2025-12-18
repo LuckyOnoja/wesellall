@@ -1,358 +1,331 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight, Star, Shield, Zap, TrendingUp } from 'lucide-react';
-import { formatPrice } from '@/utils/formatters';
+import Link from 'next/link';
+import {
+  ArrowRight,
+  ChevronRight,
+  ShieldCheck,
+  Star,
+  Truck,
+  Users,
+  Search,
+} from 'lucide-react';
+import { useState } from 'react';
 
-// Mock data for featured products
-const featuredProducts = [
-  {
-    id: '1',
-    title: '2020 Lexus RX 350 Luxury',
-    price: 28000000,
-    location: 'Lagos',
-    category: 'Cars',
-    image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&auto=format&fit=crop',
-    seller: 'Auto Elite Motors',
-    isFeatured: true,
-  },
-  {
-    id: '2',
-    title: 'iPhone 15 Pro Max 512GB',
-    price: 1200000,
-    location: 'Abuja',
-    category: 'Phones & Tablets',
-    image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w-800&auto=format&fit=crop',
-    seller: 'Tech Haven',
-    isFeatured: true,
-  },
-  {
-    id: '3',
-    title: '4-Bedroom Duplex - Lekki Phase 1',
-    price: 95000000,
-    location: 'Lagos',
-    category: 'Real Estate',
-    image: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&auto=format&fit=crop',
-    seller: 'Prime Properties',
-    isFeatured: true,
-  },
-  {
-    id: '4',
-    title: 'Dell XPS 15 Laptop',
-    price: 850000,
-    location: 'Port Harcourt',
-    category: 'Computers',
-    image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&auto=format&fit=crop',
-    seller: 'Gadget World',
-    isFeatured: true,
-  },
-];
+export default function Home() {
+  const [email, setEmail] = useState('');
 
-const categories = [
-  { name: 'Cars', icon: '🚗', count: 1254 },
-  { name: 'Phones & Tablets', icon: '📱', count: 3456 },
-  { name: 'Real Estate', icon: '🏠', count: 892 },
-  { name: 'Electronics', icon: '💻', count: 2341 },
-  { name: 'Fashion', icon: '👕', count: 4567 },
-  { name: 'Home & Garden', icon: '🪴', count: 1789 },
-];
-
-export default function HomePage() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === featuredProducts.length - 1 ? 0 : prev + 1));
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    setEmail('');
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? featuredProducts.length - 1 : prev - 1));
-  };
+  const featuredProducts = [
+    {
+      id: 1,
+      title: 'Lexus RX 350 (2020)',
+      price: '₦25,000,000',
+      image: '/cars/lexus.jpg',
+      seller: 'Verified Auto Dealer',
+      location: 'Lagos',
+      posted: '6 hours ago',
+    },
+    {
+      id: 2,
+      title: 'iPhone 14 Pro Max',
+      price: '₦850,000',
+      image: '/phones/iphone.jpg',
+      seller: 'Tech Store NG',
+      location: 'Abuja',
+      posted: '12 hours ago',
+    },
+    {
+      id: 3,
+      title: 'Luxury 3-Bedroom Apartment',
+      price: '₦150,000,000',
+      image: '/realestate/apartment.jpg',
+      seller: 'Elite Properties',
+      location: 'Lekki',
+      posted: '1 day ago',
+    },
+    {
+      id: 4,
+      title: 'ASUS ROG Gaming Laptop',
+      price: '₦1,200,000',
+      image: '/electronics/laptop.jpg',
+      seller: 'Gamer Zone',
+      location: 'Port Harcourt',
+      posted: '2 days ago',
+    },
+  ];
 
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  const categories = [
+    'Cars',
+    'Phones',
+    'Houses',
+    'Electronics',
+    'Jobs',
+    'Services',
+  ];
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-secondary to-secondary-800 text-white">
-        <div className="absolute inset-0 bg-black/30" />
-        <div className="relative max-w-7xl mx-auto px-4 py-24 md:py-32">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-              Post <span className="text-primary">Free.</span> Sell <span className="text-primary">Fast.</span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-200">
-              Cash out instantly. Nigeria&apos;s fastest-growing marketplace.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/register"
-                className="btn-primary text-lg px-8 py-4 flex items-center justify-center group"
-              >
-                Start Selling Now
-                <Zap className="ml-2 group-hover:animate-pulse" />
-              </Link>
-              <Link
-                href="/products"
-                className="btn-outline border-white text-white hover:bg-white hover:text-secondary text-lg px-8 py-4"
-              >
-                Browse Premium Listings
-              </Link>
-            </div>
+    <div className="min-h-screen bg-white">
+      {/* ================= HERO ================= */}
+      <section className="relative min-h-screen flex items-center justify-center">
+        <Image
+          src="/image3.jpg"
+          alt="Marketplace"
+          fill
+          priority
+          className="object-cover brightness-50"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40" />
+
+        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center text-white">
+          <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
+            Buy & Sell Anything <br />
+            <span className="text-primary">Across Nigeria</span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-gray-200 mb-10">
+            Post free ads, reach real buyers, and close deals faster.
+          </p>
+
+          {/* Search Bar */}
+          <div className="bg-white rounded-2xl shadow-2xl p-4 max-w-3xl mx-auto">
+            <form className="flex flex-col md:flex-row gap-3">
+              <div className="flex items-center border rounded-xl px-4 flex-1">
+                <Search className="h-5 w-5 text-gray-400 mr-2" />
+                <input
+                  type="text"
+                  placeholder="Search cars, phones, houses..."
+                  className="w-full py-3 outline-none text-gray-900"
+                />
+              </div>
+              <select className="border rounded-xl px-4 py-3 text-gray-900">
+                <option>All Locations</option>
+                <option>Lagos</option>
+                <option>Abuja</option>
+                <option>PH</option>
+              </select>
+              <button className="bg-primary text-white px-8 py-3 rounded-xl font-medium hover:bg-primary/90">
+                Search
+              </button>
+            </form>
+          </div>
+
+          {/* Stats */}
+          <div className="mt-8 flex justify-center gap-6 text-sm text-gray-200">
+            <span>🚗 120k+ listings</span>
+            <span>👥 45k+ sellers</span>
+            <span>⚡ Avg sale: 48hrs</span>
           </div>
         </div>
       </section>
 
-      {/* Featured Products Carousel */}
-      <section className="py-16 bg-gray-50">
+      {/* ================= TRUST STRIP ================= */}
+      <section className="py-12 bg-gray-50">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <TrustItem icon={ShieldCheck} text="Verified Sellers" />
+          <TrustItem icon={Users} text="Real Buyers" />
+          <TrustItem icon={Truck} text="Nationwide Reach" />
+          <TrustItem icon={Star} text="Top Rated Platform" />
+        </div>
+      </section>
+
+      {/* ================= CATEGORIES ================= */}
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center mb-10">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900">Featured Premium Listings</h2>
-              <p className="text-gray-600 mt-2">Top products from our premium sellers</p>
-            </div>
-            <div className="flex space-x-2">
-              <button
-                onClick={prevSlide}
-                className="p-2 rounded-full bg-white shadow hover:shadow-md transition-shadow"
-              >
-                <ChevronLeft size={24} />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="p-2 rounded-full bg-white shadow hover:shadow-md transition-shadow"
-              >
-                <ChevronRight size={24} />
-              </button>
-            </div>
-          </div>
+          <h2 className="text-3xl font-bold text-center mb-10">
+            Popular Categories
+          </h2>
 
-          <div className="relative overflow-hidden rounded-2xl">
-            <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-              {featuredProducts.map((product) => (
-                <div key={product.id} className="w-full flex-shrink-0">
-                  <div className="grid md:grid-cols-2 gap-8 items-center bg-white rounded-2xl shadow-xl p-8">
-                    <div className="relative h-96 rounded-xl overflow-hidden">
-                      <Image
-                        src={product.image}
-                        alt={product.title}
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold">
-                        Featured
-                      </div>
-                    </div>
-                    <div>
-                      <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
-                        {product.category}
-                      </span>
-                      <h3 className="text-2xl font-bold mt-4 mb-2">{product.title}</h3>
-                      <p className="text-gray-600 mb-6">Sold by: {product.seller}</p>
-                      <div className="text-3xl font-bold text-gray-900 mb-6">
-                        {formatPrice(product.price)}
-                      </div>
-                      <div className="flex items-center space-x-4 mb-6">
-                        <div className="flex items-center text-gray-600">
-                          <Shield size={20} className="mr-2 text-green-500" />
-                          <span>Verified Seller</span>
-                        </div>
-                        <div className="flex items-center text-gray-600">
-                          <TrendingUp size={20} className="mr-2 text-blue-500" />
-                          <span>Premium Listing</span>
-                        </div>
-                      </div>
-                      <button className="btn-primary w-full">
-                        Contact Seller
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex justify-center mt-8 space-x-2">
-            {featuredProducts.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all ${index === currentSlide ? 'bg-primary w-8' : 'bg-gray-300'}`}
-              />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {categories.map((cat) => (
+              <Link
+                key={cat}
+                href="/products"
+                className="bg-white border rounded-xl py-6 text-center font-medium hover:-translate-y-1 hover:shadow-lg transition-all"
+              >
+                {cat}
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Advertising Banner */}
-      <section className="py-16 bg-gradient-to-r from-primary to-primary-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="inline-block bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              🎯 Get Your Product on the Landing Page!
-            </h2>
-            <p className="text-xl mb-6 opacity-90">
-              Reach thousands of buyers daily with our premium advertising spots
-            </p>
-            <div className="text-5xl font-bold mb-2">₦100,000</div>
-            <p className="text-lg mb-8 opacity-80">per month • Unlimited impressions</p>
-            <Link
-              href="/register?tier=premium"
-              className="btn-secondary text-lg px-8 py-4 inline-block"
-            >
-              Book Landing Page Spot
+      {/* ================= FEATURED ================= */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold">Featured Listings</h2>
+            <Link href="/products" className="text-primary flex items-center">
+              View all <ChevronRight className="ml-1 h-4 w-4" />
             </Link>
           </div>
-        </div>
-      </section>
 
-      {/* Categories */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Browse by Category</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {categories.map((category) => (
-              <Link
-                key={category.name}
-                href={`/categories/${category.name.toLowerCase().replace(' & ', '-').replace(' ', '-')}`}
-                className="card hover:shadow-xl transition-shadow text-center group"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {featuredProducts.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white rounded-xl shadow-md hover:shadow-xl transition"
               >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">
-                  {category.icon}
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={400}
+                  height={300}
+                  className="h-48 w-full object-cover rounded-t-xl"
+                />
+                <div className="p-4">
+                  <h3 className="font-semibold mb-1">{item.title}</h3>
+                  <p className="text-primary font-bold mb-2">{item.price}</p>
+
+                  <div className="flex items-center text-xs text-gray-500 mb-1">
+                    <ShieldCheck className="h-4 w-4 mr-1 text-green-600" />
+                    Verified Seller
+                  </div>
+
+                  <p className="text-xs text-gray-500">
+                    {item.location} · {item.posted}
+                  </p>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">{category.name}</h3>
-                <p className="text-sm text-gray-600">{category.count.toLocaleString()} listings</p>
-              </Link>
+                <div className="p-4 pt-0">
+                  <button className="w-full bg-secondary text-white py-2 rounded-lg hover:bg-secondary/90">
+                    Contact Seller
+                  </button>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Seller Tiers */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Choose Your Seller Tier</h2>
+      {/* ================= PRICING ================= */}
+      <section className="py-20 bg-gradient-to-r from-secondary to-primary text-white">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-4">Boost Your Sales</h2>
+          <p className="mb-12 opacity-90">
+            Ads with boosts sell up to 5× faster
+          </p>
+
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Free Tier */}
-            <div className="card text-center">
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Free Seller</h3>
-                <div className="text-4xl font-bold text-gray-900 mb-4">₦0</div>
-                <p className="text-gray-600">Perfect for starting out</p>
-              </div>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center justify-center">
-                  <span className="text-green-500 mr-2">✓</span>
-                  Post unlimited ads
-                </li>
-                <li className="flex items-center justify-center">
-                  <span className="text-green-500 mr-2">✓</span>
-                  Basic search visibility
-                </li>
-                <li className="flex items-center justify-center text-gray-400">
-                  <span className="mr-2">✗</span>
-                  Landing page feature
-                </li>
-                <li className="flex items-center justify-center text-gray-400">
-                  <span className="mr-2">✗</span>
-                  Priority placement
-                </li>
-              </ul>
-              <Link href="/register?tier=free" className="btn-outline w-full">
-                Get Started Free
-              </Link>
-            </div>
-
-            {/* Basic Tier */}
-            <div className="card text-center relative border-2 border-primary">
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <span className="bg-primary text-white px-4 py-1 rounded-full text-sm font-semibold">
-                  Most Popular
-                </span>
-              </div>
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Basic Seller</h3>
-                <div className="text-4xl font-bold text-gray-900 mb-4">₦10,000<span className="text-lg text-gray-600">/month</span></div>
-                <p className="text-gray-600">For serious sellers</p>
-              </div>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center justify-center">
-                  <span className="text-green-500 mr-2">✓</span>
-                  Everything in Free
-                </li>
-                <li className="flex items-center justify-center">
-                  <span className="text-green-500 mr-2">✓</span>
-                  Ads reviewed within 24h
-                </li>
-                <li className="flex items-center justify-center">
-                  <span className="text-green-500 mr-2">✓</span>
-                  Higher search ranking
-                </li>
-                <li className="flex items-center justify-center text-gray-400">
-                  <span className="mr-2">✗</span>
-                  Landing page feature
-                </li>
-              </ul>
-              <Link href="/register?tier=basic" className="btn-primary w-full">
-                Upgrade to Basic
-              </Link>
-            </div>
-
-            {/* Premium Tier */}
-            <div className="card text-center bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold mb-2">Premium Seller</h3>
-                <div className="text-4xl font-bold mb-4">₦20,000<span className="text-lg opacity-80">/month</span></div>
-                <p className="opacity-80">For maximum visibility</p>
-              </div>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center justify-center">
-                  <span className="text-primary mr-2">★</span>
-                  Everything in Basic
-                </li>
-                <li className="flex items-center justify-center">
-                  <span className="text-primary mr-2">★</span>
-                  Top of search results
-                </li>
-                <li className="flex items-center justify-center">
-                  <span className="text-primary mr-2">★</span>
-                  Landing page eligibility
-                </li>
-                <li className="flex items-center justify-center">
-                  <span className="text-primary mr-2">★</span>
-                  Priority support
-                </li>
-              </ul>
-              <Link href="/register?tier=premium" className="btn-primary bg-white text-gray-900 hover:bg-gray-100 w-full">
-                Go Premium
-              </Link>
-            </div>
+            <PricingCard
+              title="Free"
+              price="₦0"
+              features={['Unlimited ads', 'Basic visibility']}
+            />
+            <PricingCard
+              title="Boosted"
+              price="₦10,000"
+              highlight
+              features={[
+                'Featured placement',
+                'Priority ranking',
+                'More buyer reach',
+              ]}
+            />
+            <PricingCard
+              title="Homepage"
+              price="₦20,000+"
+              features={[
+                'Homepage banner',
+                'Top search results',
+                'Dedicated support',
+              ]}
+            />
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 text-center">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-6">
-            Ready to <span className="text-primary">Sell Fast</span> and <span className="text-primary">Cash Out</span>?
-          </h2>
-          <p className="text-xl text-gray-600 mb-10">
-            Join thousands of successful sellers making money on WeSellAll
-          </p>
-          <Link
-            href="/register"
-            className="btn-primary text-lg px-10 py-4 inline-flex items-center group"
-          >
-            Create Your Seller Account
-            <TrendingUp className="ml-2 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
+      {/* ================= NEWSLETTER ================= */}
+      <section className="py-20 bg-secondary text-white text-center">
+        <h2 className="text-3xl font-bold mb-4">
+          Get Hot Deals Before Everyone Else
+        </h2>
+        <p className="mb-8 opacity-90">
+          Max 2 emails per month. No spam.
+        </p>
+
+        <form
+          onSubmit={handleSubscribe}
+          className="flex flex-col sm:flex-row max-w-xl mx-auto gap-3"
+        >
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            className="flex-1 px-5 py-3 rounded-xl text-gray-900"
+          />
+          <button className="bg-primary px-8 py-3 rounded-xl font-medium">
+            Subscribe
+          </button>
+        </form>
       </section>
     </div>
+  );
+}
+
+/* ================= COMPONENTS ================= */
+
+function TrustItem({ icon: Icon, text }: any) {
+  return (
+    <div>
+      <Icon className="mx-auto h-8 w-8 text-primary" />
+      <p className="mt-2 font-medium">{text}</p>
+    </div>
+  );
+}
+
+function PricingCard({ title, price, features, highlight }: any) {
+  return (
+    <div
+      className={`rounded-xl p-8 ${
+        highlight
+          ? 'bg-white text-gray-900 scale-105'
+          : 'bg-white/10 border border-white/20'
+      }`}
+    >
+      <h3 className="text-2xl font-bold mb-2">{title}</h3>
+      <p className="text-3xl font-bold mb-6">{price}</p>
+      <ul className="space-y-3 mb-6">
+        {features.map((f: string) => (
+          <li key={f} className="flex items-center">
+            <CheckIcon /> {f}
+          </li>
+        ))}
+      </ul>
+      <Link
+        href="/register"
+        className={`block py-3 rounded-lg font-medium ${
+          highlight
+            ? 'bg-primary text-white'
+            : 'bg-white text-primary'
+        }`}
+      >
+        Get Started
+      </Link>
+    </div>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      className="h-5 w-5 text-green-500 mr-2"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M5 13l4 4L19 7"
+      />
+    </svg>
   );
 }

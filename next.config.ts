@@ -1,5 +1,4 @@
-import type { NextConfig } from "next";
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     domains: ['images.unsplash.com', 'res.cloudinary.com', 'localhost'],
@@ -7,9 +6,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-    turbopack: {
-    root: __dirname,
-  },
 }
 
-export default nextConfig;
+module.exports = nextConfig
