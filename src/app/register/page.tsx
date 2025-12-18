@@ -68,6 +68,7 @@ const tierDetails = {
     ],
     cta: 'Start Free Trial',
     popular: false,
+    savings: 'Save 0%',
   },
   pro: {
     name: 'Pro Seller',
