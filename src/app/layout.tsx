@@ -25,10 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <body className="min-h-screen bg-gray-50">
+      <body className="min-h-screen bg-gray-900">
         <Providers>
           <Navbar />
-          <main className="pt-16">{children}</main>
+          <main className="pt-16 bg-gray-900">{children}</main>
           <Footer />
         </Providers>
       </body>

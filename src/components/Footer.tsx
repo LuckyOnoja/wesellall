@@ -1,23 +1,19 @@
-import Link from 'next/link';
-import { Facebook, Twitter, Instagram, Mail, Phone } from 'lucide-react';
+import Link from "next/link";
+import { Facebook, Twitter, Instagram, Mail, Phone } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary text-white mt-20">
+    <footer className="text-white mt-20 bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="h-8 w-8 bg-white rounded-lg flex items-center justify-center">
-                <span className="text-secondary font-bold">W</span>
-              </div>
-              <span className="text-xl font-bold">
-                WeSell<span className="text-primary">All</span>
-              </span>
+              <img src={"logo.png"} alt="logo" className="h-8" />
             </div>
             <p className="text-gray-300 mb-4">
-              Nigeria&apos;s fastest-growing marketplace. Post free, sell fast, and cash out instantly.
+              Nigeria&apos;s fastest-growing marketplace. Post free, sell fast,
+              and cash out instantly.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="hover:text-primary transition-colors">
@@ -37,22 +33,34 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-300 hover:text-primary transition-colors">
+                <Link
+                  href="/"
+                  className="text-gray-300 hover:text-primary transition-colors"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="text-gray-300 hover:text-primary transition-colors">
+                <Link
+                  href="/products"
+                  className="text-gray-300 hover:text-primary transition-colors"
+                >
                   All Products
                 </Link>
               </li>
               <li>
-                <Link href="/categories" className="text-gray-300 hover:text-primary transition-colors">
+                <Link
+                  href="/categories"
+                  className="text-gray-300 hover:text-primary transition-colors"
+                >
                   Categories
                 </Link>
               </li>
               <li>
-                <Link href="/sell" className="text-gray-300 hover:text-primary transition-colors">
+                <Link
+                  href="/sell"
+                  className="text-gray-300 hover:text-primary transition-colors"
+                >
                   Sell on WeSellAll
                 </Link>
               </li>
@@ -64,22 +72,34 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Seller Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/register" className="text-gray-300 hover:text-primary transition-colors">
+                <Link
+                  href="/register"
+                  className="text-gray-300 hover:text-primary transition-colors"
+                >
                   Start Selling
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="text-gray-300 hover:text-primary transition-colors">
+                <Link
+                  href="/pricing"
+                  className="text-gray-300 hover:text-primary transition-colors"
+                >
                   Pricing Tiers
                 </Link>
               </li>
               <li>
-                <Link href="/guide" className="text-gray-300 hover:text-primary transition-colors">
+                <Link
+                  href="/guide"
+                  className="text-gray-300 hover:text-primary transition-colors"
+                >
                   Seller Guide
                 </Link>
               </li>
               <li>
-                <Link href="/support" className="text-gray-300 hover:text-primary transition-colors">
+                <Link
+                  href="/support"
+                  className="text-gray-300 hover:text-primary transition-colors"
+                >
                   Seller Support
                 </Link>
               </li>
@@ -103,12 +123,21 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} WeSellAll.com.ng. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} WeSellAll.com.ng. All rights
+            reserved.
+          </p>
           <div className="mt-2 space-x-4 text-sm">
-            <Link href="/privacy" className="hover:text-primary transition-colors">
+            <Link
+              href="/privacy"
+              className="hover:text-primary transition-colors"
+            >
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-primary transition-colors">
+            <Link
+              href="/terms"
+              className="hover:text-primary transition-colors"
+            >
               Terms of Service
             </Link>
           </div>
