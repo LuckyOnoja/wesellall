@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import LayoutShell from '@/components/LayoutShell';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const poppins = Poppins({
@@ -13,23 +12,21 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'WeSellAll - Nigeria\'s Premium Marketplace',
+  title: "WeSellAll - Nigeria's Premium Marketplace",
   description: 'Post Free. Sell Fast. Cash out instantly.',
   keywords: ['marketplace', 'nigeria', 'buy and sell', 'classifieds'],
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <body className="min-h-screen bg-gray-900">
+      <body className="min-h-screen">
         <Providers>
-          <Navbar />
-          <main className="pt-16 bg-gray-900">{children}</main>
-          <Footer />
+          <LayoutShell>{children}</LayoutShell>
         </Providers>
       </body>
     </html>
