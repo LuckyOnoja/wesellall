@@ -31,6 +31,16 @@ import {
   BadgeCheck,
   Crown,
   Gem,
+  ShoppingBag,
+  Car,
+  Smartphone,
+  Laptop,
+  Shirt,
+  Wrench,
+  Music,
+  BookOpen,
+  Dumbbell,
+  Camera,
 } from 'lucide-react';
 
 export default function Home() {
@@ -50,10 +60,10 @@ export default function Home() {
       const interval = setInterval(() => {
         count++;
         setStats({
-          listings: Math.min(120000, count * 1200),
-          sellers: Math.min(45000, count * 450),
-          buyers: Math.min(85000, count * 850),
-          deals: Math.min(95000, count * 950),
+          listings: Math.min(125000, count * 1250),
+          sellers: Math.min(45600, count * 456),
+          buyers: Math.min(85400, count * 854),
+          deals: Math.min(95300, count * 953),
         });
         if (count >= 100) clearInterval(interval);
       }, 20);
@@ -63,35 +73,35 @@ export default function Home() {
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Subscribed with: ${email}`);
+    alert(`🎉 Subscribed successfully! You'll receive the best deals at: ${email}`);
     setEmail('');
   };
 
   const heroImages = [
-    '/hero/car-showcase.jpg',
-    '/hero/electronics.jpg',
-    '/hero/real-estate.jpg',
-    '/hero/fashion.jpg',
+    'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=1200&auto=format&fit=crop&q=80', // Cars
+    'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=1200&auto=format&fit=crop&q=80', // Phones
+    'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop&q=80', // Real Estate
+    'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop&q=80', // Fashion
   ];
 
   const categories = [
-    { name: 'Cars', icon: '🚗', count: '12.5k', color: 'from-blue-500 to-cyan-500' },
-    { name: 'Phones', icon: '📱', count: '8.2k', color: 'from-purple-500 to-pink-500' },
-    { name: 'Houses', icon: '🏠', count: '3.4k', color: 'from-green-500 to-emerald-500' },
-    { name: 'Electronics', icon: '💻', count: '15.7k', color: 'from-orange-500 to-red-500' },
-    { name: 'Jobs', icon: '💼', count: '5.9k', color: 'from-indigo-500 to-blue-500' },
-    { name: 'Services', icon: '🛠️', count: '7.3k', color: 'from-yellow-500 to-orange-500' },
-    { name: 'Fashion', icon: '👕', count: '9.8k', color: 'from-pink-500 to-rose-500' },
-    { name: 'Sports', icon: '⚽', count: '4.1k', color: 'from-teal-500 to-green-500' },
+    { name: 'Cars & Vehicles', icon: <Car className="h-8 w-8" />, count: '12,456', color: 'from-blue-500 to-cyan-500' },
+    { name: 'Phones & Tablets', icon: <Smartphone className="h-8 w-8" />, count: '8,234', color: 'from-purple-500 to-pink-500' },
+    { name: 'Real Estate', icon: <Home />, count: '3,891', color: 'from-green-500 to-emerald-500' },
+    { name: 'Electronics', icon: <Laptop className="h-8 w-8" />, count: '15,672', color: 'from-orange-500 to-red-500' },
+    { name: 'Fashion & Beauty', icon: <Shirt className="h-8 w-8" />, count: '9,823', color: 'from-pink-500 to-rose-500' },
+    { name: 'Jobs & Services', icon: <Wrench className="h-8 w-8" />, count: '5,456', color: 'from-indigo-500 to-blue-500' },
+    { name: 'Home & Garden', icon: <ShoppingBag className="h-8 w-8" />, count: '7,123', color: 'from-yellow-500 to-orange-500' },
+    { name: 'Sports & Fitness', icon: <Dumbbell className="h-8 w-8" />, count: '4,234', color: 'from-teal-500 to-green-500' },
   ];
 
   const featuredProducts = [
     {
       id: 1,
-      title: '2023 Lexus RX 350 F-Sport',
+      title: '2023 Lexus RX 350 F-Sport - Clean Import',
       price: '₦28,500,000',
       originalPrice: '₦30,000,000',
-      image: '/cars/lexus-rx.jpg',
+      image: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&auto=format&fit=crop&q=80',
       seller: 'Auto Elite Dealer',
       sellerVerified: true,
       location: 'Victoria Island, Lagos',
@@ -100,13 +110,15 @@ export default function Home() {
       likes: 45,
       premium: true,
       urgent: true,
+      rating: 4.9,
+      reviews: 89,
     },
     {
       id: 2,
-      title: 'iPhone 15 Pro Max 1TB',
+      title: 'iPhone 15 Pro Max 1TB - Brand New, Unopened',
       price: '₦950,000',
       originalPrice: '₦1,200,000',
-      image: '/phones/iphone15.jpg',
+      image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800&auto=format&fit=crop&q=80',
       seller: 'Tech Haven NG',
       sellerVerified: true,
       location: 'Wuse, Abuja',
@@ -115,42 +127,48 @@ export default function Home() {
       likes: 89,
       premium: true,
       badge: 'Trending',
+      rating: 4.8,
+      reviews: 156,
     },
     {
       id: 3,
-      title: 'Luxury 4-Bedroom Penthouse',
+      title: 'Luxury 4-Bedroom Penthouse with Pool View',
       price: '₦180,000,000',
       originalPrice: '₦200,000,000',
-      image: '/realestate/penthouse.jpg',
+      image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&auto=format&fit=crop&q=80',
       seller: 'Prime Properties',
       sellerVerified: true,
-      location: 'Lekki Phase 1',
+      location: 'Lekki Phase 1, Lagos',
       posted: '1 day ago',
       views: '3.4k',
       likes: 123,
       premium: true,
       featured: true,
+      rating: 4.9,
+      reviews: 45,
     },
     {
       id: 4,
-      title: 'ASUS ROG Strix Gaming Laptop',
+      title: 'ASUS ROG Strix Gaming Laptop - RTX 4070, 32GB RAM',
       price: '₦1,450,000',
       originalPrice: '₦1,800,000',
-      image: '/electronics/rog-laptop.jpg',
+      image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=800&auto=format&fit=crop&q=80',
       seller: 'Gamer\'s Paradise',
       sellerVerified: true,
-      location: 'Port Harcourt',
+      location: 'Port Harcourt, Rivers',
       posted: '2 days ago',
       views: '1.8k',
       likes: 67,
       badge: 'Hot Deal',
+      rating: 4.7,
+      reviews: 112,
     },
     {
       id: 5,
-      title: 'Rolex Datejust 41mm',
+      title: 'Rolex Datejust 41mm - 2023 Model with Papers',
       price: '₦12,500,000',
       originalPrice: '₦15,000,000',
-      image: '/luxury/rolex.jpg',
+      image: 'https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=800&auto=format&fit=crop&q=80',
       seller: 'Luxury Timepieces',
       sellerVerified: true,
       location: 'Ikoyi, Lagos',
@@ -158,13 +176,15 @@ export default function Home() {
       views: '890',
       likes: 34,
       premium: true,
+      rating: 5.0,
+      reviews: 23,
     },
     {
       id: 6,
-      title: '2022 Toyota Land Cruiser',
+      title: '2022 Toyota Land Cruiser VXR - Full Option',
       price: '₦45,000,000',
       originalPrice: '₦48,000,000',
-      image: '/cars/landcruiser.jpg',
+      image: 'https://images.unsplash.com/photo-1593941707882-a5bba5338fe2?w=800&auto=format&fit=crop&q=80',
       seller: 'Premium Autos',
       sellerVerified: true,
       location: 'Maitama, Abuja',
@@ -172,6 +192,8 @@ export default function Home() {
       views: '2.5k',
       likes: 156,
       urgent: true,
+      rating: 4.9,
+      reviews: 67,
     },
   ];
 
@@ -205,25 +227,34 @@ export default function Home() {
   const testimonials = [
     {
       name: 'Ahmed Bello',
-      role: 'Car Dealer',
+      role: 'Car Dealer, Lagos',
       content: 'Sold 15 cars in my first month! The premium listing feature is worth every kobo.',
-      avatar: '/avatars/ahmed.jpg',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&facepad=2',
       rating: 5,
     },
     {
       name: 'Chioma Okonkwo',
-      role: 'Phone Retailer',
+      role: 'Phone Retailer, Abuja',
       content: 'My phone business grew 300% since joining. The customer support is amazing!',
-      avatar: '/avatars/chioma.jpg',
+      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&auto=format&fit=crop&facepad=2',
       rating: 5,
     },
     {
       name: 'Tunde Williams',
-      role: 'Real Estate Agent',
+      role: 'Real Estate Agent, PH',
       content: 'Closed a ₦120M property deal through WeSellAll. This platform is a game-changer.',
-      avatar: '/avatars/tunde.jpg',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop&facepad=2',
       rating: 5,
     },
+  ];
+
+  const popularCities = [
+    { name: 'Lagos', listings: '45,230', icon: '🌆' },
+    { name: 'Abuja', listings: '23,450', icon: '🏛️' },
+    { name: 'Port Harcourt', listings: '15,670', icon: '🌉' },
+    { name: 'Ibadan', listings: '12,340', icon: '🏙️' },
+    { name: 'Kano', listings: '10,980', icon: '🕌' },
+    { name: 'Enugu', listings: '8,760', icon: '⛰️' },
   ];
 
   return (
@@ -248,7 +279,7 @@ export default function Home() {
                   {[1, 2, 3, 4, 5].map((i) => (
                     <Star key={i} size={14} className="fill-yellow-400 text-yellow-400" />
                   ))}
-                  <span className="ml-2 text-sm">4.9/5</span>
+                  <span className="ml-2 text-sm">4.9/5 (12,456 reviews)</span>
                 </div>
               </div>
 
@@ -287,10 +318,13 @@ export default function Home() {
                       <option>Kano</option>
                     </select>
                   </div>
-                  <button className="bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center">
+                  <Link
+                    href="/products"
+                    className="bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center"
+                  >
                     <Search className="mr-2 h-5 w-5" />
                     Search
-                  </button>
+                  </Link>
                 </div>
               </div>
 
@@ -329,6 +363,11 @@ export default function Home() {
                       index === 0 ? 'col-span-2' : ''
                     }`}
                   >
+                    <img
+                      src={img}
+                      alt={index === 0 ? 'Premium Cars' : index === 1 ? 'Latest Tech' : index === 2 ? 'Luxury Homes' : 'Fashion'}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
                     <div className="absolute bottom-4 left-4 z-20 text-white">
                       <span className="text-sm font-medium">
@@ -337,7 +376,6 @@ export default function Home() {
                          index === 2 ? 'Luxury Homes' : 'Fashion'}
                       </span>
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 group-hover:scale-110 transition-transform duration-500" />
                   </div>
                 ))}
               </div>
@@ -387,27 +425,30 @@ export default function Home() {
             <p className="text-gray-600 text-lg">Find exactly what you're looking for</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {categories.map((cat) => (
-              <button
+              <Link
                 key={cat.name}
-                onClick={() => setActiveCategory(cat.name)}
-                className={`group relative p-4 rounded-2xl transition-all hover:scale-105 ${
+                href={`/products?category=${encodeURIComponent(cat.name)}`}
+                className={`group relative p-6 rounded-2xl transition-all hover:scale-105 ${
                   activeCategory === cat.name
                     ? 'bg-gradient-to-br from-primary to-secondary text-white shadow-lg shadow-primary/25'
                     : 'bg-white hover:shadow-xl border hover:border-primary/20'
                 }`}
+                onClick={() => setActiveCategory(cat.name)}
               >
-                <div className="flex flex-col items-center space-y-2">
-                  <span className="text-2xl">{cat.icon}</span>
-                  <span className="font-medium">{cat.name}</span>
+                <div className="flex flex-col items-center space-y-3">
+                  <div className={`p-3 rounded-full ${activeCategory === cat.name ? 'bg-white/20' : 'bg-gray-50'}`}>
+                    {cat.icon}
+                  </div>
+                  <span className="font-medium text-center">{cat.name}</span>
                   <span className={`text-sm ${
                     activeCategory === cat.name ? 'text-white/80' : 'text-gray-500'
                   }`}>
                     {cat.count} items
                   </span>
                 </div>
-              </button>
+              </Link>
             ))}
           </div>
         </div>
@@ -426,14 +467,14 @@ export default function Home() {
               <p className="text-gray-600 mt-2">Curated selection of top-quality items</p>
             </div>
             <div className="flex items-center space-x-4 mt-4 md:mt-0">
-              <button className="flex items-center text-primary font-semibold hover:text-primary/80">
+              <Link href="/products" className="flex items-center text-primary font-semibold hover:text-primary/80">
                 View all
                 <ChevronRight className="ml-1 h-4 w-4" />
-              </button>
-              <button className="bg-primary text-white px-6 py-2 rounded-full font-medium hover:bg-primary/90">
+              </Link>
+              <Link href="/products" className="bg-primary text-white px-6 py-2 rounded-full font-medium hover:bg-primary/90">
                 <Filter className="inline mr-2 h-4 w-4" />
-                Filters
-              </button>
+                Browse All
+              </Link>
             </div>
           </div>
 
@@ -441,6 +482,40 @@ export default function Home() {
             {featuredProducts.map((item) => (
               <ProductCard key={item.id} item={item} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= POPULAR CITIES ================= */}
+      <section className="py-20 bg-gradient-to-r from-secondary/5 to-primary/5">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">Popular Across Nigeria</h2>
+            <p className="text-gray-600">Find items in your city or nearby locations</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {popularCities.map((city) => (
+              <Link
+                key={city.name}
+                href={`/products?location=${encodeURIComponent(city.name)}`}
+                className="bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-shadow hover:-translate-y-1"
+              >
+                <div className="text-3xl mb-3">{city.icon}</div>
+                <h3 className="font-bold text-lg mb-2">{city.name}</h3>
+                <p className="text-gray-600 text-sm">{city.listings} listings</p>
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/products"
+              className="inline-flex items-center border-2 border-primary text-primary px-8 py-3 rounded-full font-bold hover:bg-primary hover:text-white transition-all"
+            >
+              <MapPin className="mr-2 h-5 w-5" />
+              Explore All Cities
+            </Link>
           </div>
         </div>
       </section>
@@ -501,9 +576,11 @@ export default function Home() {
                 className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow"
               >
                 <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold">
-                    {testimonial.name.charAt(0)}
-                  </div>
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
                   <div className="ml-4">
                     <h4 className="font-bold">{testimonial.name}</h4>
                     <p className="text-gray-600 text-sm">{testimonial.role}</p>
@@ -535,9 +612,11 @@ export default function Home() {
               price="₦0"
               period="forever"
               description="Perfect for casual sellers"
-              features={['5 free listings/month', 'Basic visibility', 'Standard support']}
+              features={['5 free listings/month', 'Basic visibility', 'Standard support', 'Email notifications', 'Seller dashboard']}
               buttonText="Get Started"
+              buttonLink="/register?tier=free"
               popular={false}
+              color="from-gray-400 to-gray-600"
             />
             <PricingCard
               name="Pro Seller"
@@ -548,26 +627,34 @@ export default function Home() {
                 '50 premium listings',
                 'Featured placement',
                 'Priority support',
-                'Analytics dashboard',
-                'Seller badge',
+                'Advanced analytics',
+                'Pro seller badge',
+                'WhatsApp notifications',
               ]}
               buttonText="Go Pro"
+              buttonLink="/register?tier=pro"
               popular={true}
+              color="from-primary to-orange-500"
+              savings="Save 20%"
             />
             <PricingCard
-              name="Enterprise"
-              price="₦50,000"
+              name="Business"
+              price="₦30,000"
               period="/month"
               description="For businesses & dealers"
               features={[
                 'Unlimited listings',
-                'Homepage feature',
+                'Top search placement',
+                '24/7 premium support',
+                'Business analytics suite',
+                'Verified business badge',
                 'Dedicated account manager',
-                'API access',
-                'Custom storefront',
               ]}
-              buttonText="Contact Sales"
+              buttonText="Scale Business"
+              buttonLink="/register?tier=business"
               popular={false}
+              color="from-secondary to-blue-600"
+              savings="Save 40%"
             />
           </div>
         </div>
@@ -591,18 +678,59 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/sell"
+              href="/register?tier=pro"
               className="bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 hover:scale-105 transition-all"
             >
               Start Selling Free
             </Link>
             <Link
-              href="/tour"
+              href="/sell"
               className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all"
             >
-              Take a Platform Tour
+              Learn How to Sell
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* ================= NEWSLETTER ================= */}
+      <section className="py-20 bg-gradient-to-br from-gray-900 to-black">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary mb-6 mx-auto">
+            <Gem className="h-8 w-8 text-white" />
+          </div>
+          
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            Get Exclusive Deals & Updates
+          </h2>
+          
+          <p className="text-gray-400 text-lg mb-8">
+            Subscribe to receive the hottest deals, latest listings, and marketplace tips. No spam, ever.
+          </p>
+
+          <form
+            onSubmit={handleSubscribe}
+            className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto"
+          >
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email address"
+              className="flex-1 px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full font-bold hover:shadow-lg hover:scale-105 transition-all"
+            >
+              Subscribe Now
+            </button>
+          </form>
+          
+          <p className="text-gray-500 text-sm mt-4">
+            Join 50,000+ subscribers. Unsubscribe anytime.
+          </p>
         </div>
       </section>
     </div>
@@ -644,10 +772,15 @@ function ProductCard({ item }: any) {
     <div className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
       {/* Image Container */}
       <div className="relative h-64 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10" />
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
         
         {/* Badges */}
-        <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
+        <div className="absolute top-3 left-3 flex flex-col gap-2">
           {item.premium && (
             <span className="inline-flex items-center bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-3 py-1 rounded-full text-xs font-bold">
               <Crown className="h-3 w-3 mr-1" />
@@ -657,7 +790,7 @@ function ProductCard({ item }: any) {
           {item.urgent && (
             <span className="inline-flex items-center bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold">
               <Zap className="h-3 w-3 mr-1" />
-              URGENT SALE
+              URGENT
             </span>
           )}
           {item.featured && (
@@ -674,7 +807,7 @@ function ProductCard({ item }: any) {
         </div>
 
         {/* Action Buttons */}
-        <div className="absolute top-4 right-4 z-20 flex gap-2">
+        <div className="absolute top-3 right-3 flex gap-2">
           <button className="p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white">
             <Heart className="h-4 w-4" />
           </button>
@@ -687,13 +820,12 @@ function ProductCard({ item }: any) {
       {/* Product Details */}
       <div className="p-6">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-bold text-lg group-hover:text-primary transition-colors">
+          <h3 className="font-bold text-lg group-hover:text-primary transition-colors line-clamp-2">
             {item.title}
           </h3>
-          <div className="flex items-center text-sm text-gray-500">
-            <Clock className="h-3 w-3 mr-1" />
-            {item.posted}
-          </div>
+          {item.sellerVerified && (
+            <BadgeCheck className="h-5 w-5 text-green-500 flex-shrink-0 ml-2" />
+          )}
         </div>
 
         <div className="flex items-center justify-between mb-4">
@@ -703,7 +835,16 @@ function ProductCard({ item }: any) {
               <div className="text-sm text-gray-500 line-through">{item.originalPrice}</div>
             )}
           </div>
-          <div className="flex items-center space-x-4 text-sm text-gray-500">
+          <div className="flex items-center text-sm">
+            <Star className="h-4 w-4 text-yellow-500 fill-current" />
+            <span className="ml-1 font-medium">{item.rating}</span>
+            <span className="ml-1 text-gray-500">({item.reviews})</span>
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+          <div className="flex items-center space-x-4">
             <span className="flex items-center">
               <Eye className="h-4 w-4 mr-1" />
               {item.views}
@@ -713,6 +854,10 @@ function ProductCard({ item }: any) {
               {item.likes}
             </span>
           </div>
+          <span className="flex items-center">
+            <Clock className="h-4 w-4 mr-1" />
+            {item.posted}
+          </span>
         </div>
 
         {/* Seller Info */}
@@ -724,9 +869,6 @@ function ProductCard({ item }: any) {
             <div className="ml-3">
               <div className="flex items-center">
                 <span className="font-medium text-sm">{item.seller}</span>
-                {item.sellerVerified && (
-                  <BadgeCheck className="h-4 w-4 text-green-500 ml-1" />
-                )}
               </div>
               <div className="flex items-center text-xs text-gray-500">
                 <MapPin className="h-3 w-3 mr-1" />
@@ -734,16 +876,19 @@ function ProductCard({ item }: any) {
               </div>
             </div>
           </div>
-          <button className="bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full text-sm font-medium hover:shadow-lg hover:scale-105 transition-all">
-            Contact Seller
-          </button>
+          <Link
+            href={`/product/${item.id}`}
+            className="bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full text-sm font-medium hover:shadow-lg hover:scale-105 transition-all"
+          >
+            View Details
+          </Link>
         </div>
       </div>
     </div>
   );
 }
 
-function PricingCard({ name, price, period, description, features, buttonText, popular }: any) {
+function PricingCard({ name, price, period, description, features, buttonText, buttonLink, popular, color, savings }: any) {
   return (
     <div className={`relative rounded-2xl p-8 ${
       popular 
@@ -754,6 +899,14 @@ function PricingCard({ name, price, period, description, features, buttonText, p
         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
           <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-6 py-1 rounded-full text-sm font-bold">
             MOST POPULAR
+          </div>
+        </div>
+      )}
+      
+      {savings && (
+        <div className="absolute -top-3 right-4">
+          <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+            {savings}
           </div>
         </div>
       )}
@@ -782,13 +935,16 @@ function PricingCard({ name, price, period, description, features, buttonText, p
         ))}
       </ul>
 
-      <button className={`w-full py-4 rounded-xl font-bold text-lg transition-all ${
-        popular
-          ? 'bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/25'
-          : 'bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg'
-      }`}>
+      <Link
+        href={buttonLink}
+        className={`block w-full py-4 rounded-xl font-bold text-lg text-center transition-all ${
+          popular
+            ? `bg-gradient-to-r ${color} hover:shadow-lg hover:shadow-primary/25`
+            : 'bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg'
+        }`}
+      >
         {buttonText}
-      </button>
+      </Link>
     </div>
   );
 }
