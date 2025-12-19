@@ -28,7 +28,7 @@ export default function Home() {
               From Lagos to Abuja, connect with millions of buyers and sellers. Trusted by over 2 million Nigerians.
             </p>
           </div>
-          {/* Glass Search Bar */}
+          {/* Glass Search Bar Showing */}
           <div className="w-full max-w-2xl p-2 rounded-2xl glass shadow-2xl mt-4">
             <div className="flex flex-col sm:flex-row items-center gap-2">
               <div className="flex-1 flex items-center h-12 w-full px-4 rounded-xl bg-black/20 border border-white/5 focus-within:border-primary/50 transition-colors">
