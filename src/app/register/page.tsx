@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -112,7 +112,64 @@ const tierDetails = {
   },
 };
 
-export default function RegistrationPage() {
+// Create a skeleton loading component
+function RegistrationPageSkeleton() {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-primary/5">
+      {/* Animated Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/10 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 py-12">
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Left Column - Form Skeleton */}
+          <div>
+            <div className="bg-white rounded-3xl shadow-2xl p-8 lg:p-12">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center space-x-2 text-2xl font-bold mb-4">
+                  <div className="w-10 h-10 bg-gray-200 rounded-xl animate-pulse" />
+                  <div className="h-8 w-32 bg-gray-200 rounded animate-pulse" />
+                </div>
+                <div className="h-10 w-3/4 mx-auto bg-gray-200 rounded mb-3 animate-pulse" />
+                <div className="h-4 w-1/2 mx-auto bg-gray-200 rounded animate-pulse" />
+              </div>
+
+              <div className="space-y-6">
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <div key={i} className="space-y-2">
+                    <div className="h-4 w-24 bg-gray-200 rounded animate-pulse" />
+                    <div className="h-12 w-full bg-gray-200 rounded-xl animate-pulse" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Benefits Skeleton */}
+          <div className="space-y-8">
+            <div className="bg-gray-900 rounded-3xl p-8 animate-pulse">
+              <div className="h-8 w-3/4 bg-gray-700 rounded mb-6" />
+              <div className="grid grid-cols-2 gap-6">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="text-center p-4">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-700 mb-3" />
+                    <div className="h-6 w-16 mx-auto bg-gray-700 rounded mb-1" />
+                    <div className="h-4 w-20 mx-auto bg-gray-700 rounded" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Your main component - rename from default export
+function RegistrationPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const initialTier = (searchParams.get('tier') as keyof typeof tierDetails) || 'free';
@@ -699,5 +756,14 @@ export default function RegistrationPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Create a wrapper component that uses Suspense
+export default function RegistrationPage() {
+  return (
+    <Suspense fallback={<RegistrationPageSkeleton />}>
+      <RegistrationPageContent />
+    </Suspense>
   );
 }
