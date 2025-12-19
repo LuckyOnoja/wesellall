@@ -1,14 +1,19 @@
 import type { Metadata } from 'next';
-import { Inter, Poppins } from 'next/font/google';
+import { Space_Grotesk, Noto_Sans } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
 import LayoutShell from '@/components/LayoutShell';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const poppins = Poppins({
-  weight: ['400', '500', '600', '700', '800'],
+const spaceGrotesk = Space_Grotesk({
+  weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
-  variable: '--font-poppins',
+  variable: '--font-space-grotesk',
+});
+
+const notoSans = Noto_Sans({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-noto-sans',
 });
 
 export const metadata: Metadata = {
@@ -23,8 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <body className="min-h-screen">
+    <html lang="en" className={`dark ${spaceGrotesk.variable} ${notoSans.variable}`}>
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+      </head>
+      <body className="min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden transition-colors duration-300">
         <Providers>
           <LayoutShell>{children}</LayoutShell>
         </Providers>

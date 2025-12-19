@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingCart, User, Menu, X, Bell, Search, TrendingUp } from 'lucide-react';
+import { ShoppingCart, User, Menu, X, Bell, Search, TrendingUp, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
@@ -28,17 +28,21 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg py-2' : 'bg-transparent py-4'
-    }`}>
+    <nav 
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white shadow-md py-3' 
+          : 'bg-white/95 py-4'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-3">
-             <img 
-                src={'logo.png'}  
-                alt='logo'
+            <Link href="/" className="flex items-center space-x-2">
+              <img 
+                src="/logo.png"  
+                alt="WeSellAll Logo"
                 className="h-8"
               />
             </Link>
@@ -107,7 +111,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden mt-4 bg-white rounded-2xl shadow-2xl p-4 animate-slide-up">
+          <div className="lg:hidden mt-4 bg-white rounded-2xl shadow-2xl p-4">
             {/* Mobile Search */}
             <div className="flex items-center bg-gray-100 rounded-xl px-4 py-3 mb-4">
               <Search size={18} className="text-gray-400 mr-2" />
