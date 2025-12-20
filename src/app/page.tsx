@@ -124,7 +124,7 @@ export default function Home() {
 
   return (
     <div className="bg-background-light text-slate-800">
-      {/* ================= HERO SECTION ================= */}
+      {/* HERO SECTION */}
       <div className="relative bg-surface-light overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-10">
           <svg className="h-full w-full text-primary" fill="currentColor" preserveAspectRatio="none" viewBox="0 0 100 100">
