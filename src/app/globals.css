@@ -8,6 +8,10 @@
   --background-light: #f8f6f5;
   --background-dark: #23140f;
   --dark-surface: #2c1a14;
+  --dark-lighter: #3a251e;
+  --dark-input: #1a0f0b;
+  --dark-card: #362019;
+  --dark-elevated: #3a241c;
 }
 
 @theme inline {
@@ -22,6 +26,10 @@
   --color-background-light: var(--background-light);
   --color-background-dark: var(--background-dark);
   --color-dark-surface: var(--dark-surface);
+  --color-dark-lighter: var(--dark-lighter);
+  --color-dark-input: var(--dark-input);
+  --color-dark-card: var(--dark-card);
+  --color-dark-elevated: var(--dark-elevated);
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-2xl: 1rem;
@@ -97,10 +105,86 @@ html {
 
 /* Glass effect */
 .glass {
-  background: rgba(35, 20, 15, 0.6);
+  background: rgba(35, 20, 15, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Sidebar link active state */
+.sidebar-link.active {
+  background: rgba(255, 105, 51, 0.1);
+  color: #ff6933;
+  border-right: 3px solid #ff6933;
+}
+
+/* Glass panel */
+.glass-panel {
+  background: rgba(44, 26, 20, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Glass buttons */
+.glass-button-success {
+  background: rgba(16, 185, 129, 0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: #34d399;
+}
+
+.glass-button-success:hover {
+  background: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+.glass-button-danger {
+  background: rgba(239, 68, 68, 0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+.glass-button-danger:hover {
+  background: rgba(239, 68, 68, 0.2);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
+}
+
+/* Tilt card effect */
+.tilt-card {
+  transition: transform 0.1s ease;
+  transform-style: preserve-3d;
+}
+
+.tilt-card:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+}
+
+/* Step content animation */
+.step-content {
+  display: none;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.step-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card gradient overlay */
+.card-gradient {
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%);
 }
 
 /* Premium card effect */
@@ -143,4 +227,47 @@ html {
 
 .animate-pulse-slow {
   animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Hot gradient background */
+.bg-hot-gradient {
+  background: linear-gradient(135deg, #ff6933 0%, #ff3333 100%);
+}
+
+/* Custom checkbox and radio styles */
+input[type="radio"]:checked,
+input[type="checkbox"]:checked {
+  background-color: #ff6933;
+  border-color: #ff6933;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  box-shadow: 0 0 0 2px rgba(255, 105, 51, 0.4);
+}
+
+/* Custom range slider styles */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: #ff6933;
+  cursor: pointer;
+  margin-top: -10px;
+  box-shadow: 0 0 10px rgba(255, 105, 51, 0.5);
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
 }

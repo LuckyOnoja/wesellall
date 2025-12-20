@@ -11,7 +11,7 @@ export default function LayoutShell({
 }) {
   const pathname = usePathname();
 
-  const hideLayout = pathname === '/register';
+  const hideLayout = pathname === '/register' || pathname === '/dashboard' || pathname === '/admin';
 
   return (
     <>

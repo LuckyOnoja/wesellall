@@ -1,533 +1,298 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import {
-  Filter,
-  Search,
-  MapPin,
-  Clock,
-  Heart,
-  Eye,
-  ChevronDown,
-  ChevronUp,
-  Star,
-  ShieldCheck,
-  CheckCircle,
-  TrendingUp,
-  Sparkles,
-  X,
-  Sliders,
-} from 'lucide-react';
-
-const categories = [
-  { id: 1, name: 'Cars & Vehicles', count: '12,456', icon: '🚗', color: 'from-blue-500 to-cyan-500' },
-  { id: 2, name: 'Phones & Tablets', count: '8,234', icon: '📱', color: 'from-purple-500 to-pink-500' },
-  { id: 3, name: 'Real Estate', count: '3,891', icon: '🏠', color: 'from-green-500 to-emerald-500' },
-  { id: 4, name: 'Electronics', count: '15,672', icon: '💻', color: 'from-orange-500 to-red-500' },
-  { id: 5, name: 'Fashion & Beauty', count: '9,823', icon: '👗', color: 'from-pink-500 to-rose-500' },
-  { id: 6, name: 'Jobs & Services', count: '5,456', icon: '💼', color: 'from-indigo-500 to-blue-500' },
-  { id: 7, name: 'Home & Garden', count: '7,123', icon: '🛋️', color: 'from-yellow-500 to-orange-500' },
-  { id: 8, name: 'Sports & Fitness', count: '4,234', icon: '⚽', color: 'from-teal-500 to-green-500' },
-];
-
-const locations = [
-  'All Nigeria',
-  'Lagos State',
-  'Abuja FCT',
-  'Port Harcourt',
-  'Ibadan',
-  'Kano',
-  'Enugu',
-  'Benin',
-  'Abeokuta',
-  'Jos',
-];
-
-const sortOptions = [
-  'Recommended',
-  'Newest First',
-  'Price: Low to High',
-  'Price: High to Low',
-  'Most Viewed',
-  'Ending Soon',
-];
-
-const priceRanges = [
-  { label: 'Under ₦50,000', value: '0-50000' },
-  { label: '₦50,000 - ₦200,000', value: '50000-200000' },
-  { label: '₦200,000 - ₦500,000', value: '200000-500000' },
-  { label: '₦500,000 - ₦1M', value: '500000-1000000' },
-  { label: '₦1M - ₦5M', value: '1000000-5000000' },
-  { label: 'Over ₦5M', value: '5000000-100000000' },
-];
-
-const conditionOptions = ['New', 'Used - Like New', 'Used - Good', 'Used - Fair'];
 
 const products = [
   {
     id: 1,
-    title: '2022 Toyota Camry XLE',
-    price: '₦12,500,000',
-    originalPrice: '₦13,800,000',
-    image: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800&auto=format&fit=crop',
-    category: 'Cars & Vehicles',
-    location: 'Lekki, Lagos',
-    posted: '2 hours ago',
-    views: '1.2k',
-    likes: 45,
-    condition: 'Used - Like New',
-    verifiedSeller: true,
-    urgent: true,
-    premium: true,
+    title: 'Toyota Camry 2021',
+    price: '₦ 8,500,000',
+    location: 'Ikeja, Lagos',
+    condition: 'Foreign Used',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYkajuIqCGYfuwfVXGXWRDvDBnLBTKDdnft5BzopWA2klnazlXnQymparvK6PKYFzOkyta8W7tO2ixfsYprpgeREruncGKCNBNfFHUitje723GRoS56gTUN1gIADAboCFEm_ThSZSKJDihIu7CStUFjyqZpkfQaSN3o4fUnEO_iXI8hLChrlEsspxYoLYRI2nHGNpPdIx_i_3gpy0M8sg8tgx1LdbiveCjpz9hBryWokg1f8ebdRIzUp24GqdrfD9UkAYW_8bAEQ',
+    badge: { type: 'premium', label: 'Premium' },
+    seller: { name: 'AutoMart Ltd', initial: 'A', color: 'bg-secondary' },
   },
   {
     id: 2,
-    title: 'iPhone 14 Pro Max 256GB',
-    price: '₦850,000',
-    originalPrice: '₦950,000',
-    image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w-800&auto=format&fit=crop',
-    category: 'Phones & Tablets',
-    location: 'Victoria Island, Lagos',
-    posted: '5 hours ago',
-    views: '2.3k',
-    likes: 89,
-    condition: 'New',
-    verifiedSeller: true,
-    trending: true,
+    title: 'iPhone 15 Pro Max',
+    price: '₦ 1,200,000',
+    location: 'Wuse 2, Abuja',
+    condition: 'Brand New',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCFBsx2ugUFtLxtNHa7xTDv-C5pA4EX2xgAQw_4S20a96i4M4YExJzYRP0L_GDQReFfcpk4egVXVqm2-NrpWcvrUv6kdmR9za2OYTMk16odQjBtc1Cqv-4gin3QKel6Q8WAe9EVrKKHrsFL8n_hmnUa_i0ODPToPYjo_dpQOOeqbKN-qIYy40pcwuegzoRWqIJEAJwcpN97jtb6wZpMVvG58oIkOoyMwlrBQSdvV6SxKq-LmRVb1-zUHLSn3itiHInPSoVE21xnMg',
+    badge: { type: 'urgent', label: 'Urgent' },
+    seller: { name: 'GadgetWorld', initial: 'G', color: 'bg-primary' },
   },
   {
     id: 3,
-    title: '3-Bedroom Apartment For Rent',
-    price: '₦3,500,000/yr',
-    originalPrice: '₦4,000,000',
-    image: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&auto=format&fit=crop',
-    category: 'Real Estate',
-    location: 'Ikoyi, Lagos',
-    posted: '1 day ago',
-    views: '3.1k',
-    likes: 123,
-    condition: 'New',
-    verifiedSeller: true,
-    featured: true,
+    title: '3 Bed Serviced Flat',
+    price: '₦ 45,000,000',
+    location: 'Lekki Phase 1',
+    condition: 'New Build',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCzlzcQJhWyo3p39-FtBiIoyqcBg3zewCxqZA465TJkwOw18DWhoKdZAsryRWFEB1n1X23z9sN09GzDk5tl7FOkvTfPwDWV4PsYLiDiApCrZqEMwDwrCYOuIGGIs_oK2Djj8jPsvcEVtxOIPVTWGclsx7nt4IfTYBKu97NzFSD7NoUC0bJmNl8EH1nlVBJbo7tuhfWja6SmnL4AWewjBREh1sfjWelVnxbfbQWOVUkwr5IfWByRCro59RMNs3RLs__mislQDO4-Uw',
+    seller: { name: 'HomeRealty', initial: 'H', color: 'bg-purple-600' },
   },
   {
     id: 4,
-    title: 'MacBook Pro M2 16"',
-    price: '₦1,200,000',
-    originalPrice: '₦1,350,000',
-    image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&auto=format&fit=crop',
-    category: 'Electronics',
-    location: 'Wuse, Abuja',
-    posted: '3 days ago',
-    views: '1.8k',
-    likes: 67,
-    condition: 'Used - Like New',
-    verifiedSeller: true,
+    title: 'Pro Gaming Setup',
+    price: '₦ 450,000',
+    location: 'Port Harcourt',
+    condition: 'Used',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDpc5c0MSfuZs1mUIw7TYK9ypMWhPXAAUhDs8b-5a6JPmJKvYllCjnpQsDziHLDX5NGSWsS-ZS021uK4F0sUgVzQR86jrEudGEHKcIi3miwtF1K-QymYgu23_o9vE5ek-RGh-4e-nCVf0Xtw409NFtugy7B8A5dTkh_SoHa9gDNp-VeH7JPjj0BCKZHRvnUOKmJdv7u3BWgTCVs7S75Oci_bC8xCIDsPAspc08Kck2xpb_5I6hft926ylguRoUs5xMOqF3OOmsFKA',
+    seller: { name: 'DavidTech', initial: 'D', color: 'bg-blue-500' },
   },
   {
     id: 5,
-    title: 'Designer Handbag Collection',
-    price: '₦450,000',
-    originalPrice: '₦600,000',
-    image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&auto=format&fit=crop',
-    category: 'Fashion & Beauty',
-    location: 'Maitama, Abuja',
-    posted: '6 hours ago',
-    views: '890',
-    likes: 34,
-    condition: 'Used - Good',
-    verifiedSeller: false,
-    urgent: true,
+    title: 'MacBook Pro M2',
+    price: '₦ 1,850,000',
+    location: 'Yaba, Lagos',
+    condition: 'Brand New',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBLleH8qsh6_MG5Mx0LDXTIG6VAcdQr00MZ1WhQuHtkga4YsMnYK2pq9N49myPc6AIVXly0od6-Habc3Rd1Y3XRFE55NOCW9VckETTtjJpDF9IhNe6jI_aZLaa-ZejhN0ES85bsFsn6i9lEN1CtCUiO0e38grVQeWh-B1oSTw473MnShxR6r9QMHU0SoOsgBybUC5Z72PdfNJvrXQ7ZI-XEKYrGJTWtPEvJQxSB6DAkHaqza0qyWW8eVtOWFs7kHsjMx2vDd2a0RQ',
+    badge: { type: 'premium', label: 'Premium' },
+    seller: { name: 'MacCenter', initial: 'M', color: 'bg-green-500' },
   },
   {
     id: 6,
-    title: 'Fitness Equipment Set',
-    price: '₦280,000',
-    originalPrice: '₦350,000',
-    image: 'https://images.unsplash.com/photo-1536922246289-88c42f957773?w=800&auto=format&fit=crop',
-    category: 'Sports & Fitness',
-    location: 'Port Harcourt',
-    posted: '2 days ago',
-    views: '1.5k',
-    likes: 56,
-    condition: 'Used - Good',
-    verifiedSeller: true,
-  },
-  {
-    id: 7,
-    title: 'Professional Camera Kit',
-    price: '₦750,000',
-    originalPrice: '₦900,000',
-    image: 'https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=800&auto=format&fit=crop',
-    category: 'Electronics',
-    location: 'Surulere, Lagos',
-    posted: '1 day ago',
-    views: '2.1k',
-    likes: 78,
-    condition: 'Used - Like New',
-    verifiedSeller: true,
-    premium: true,
-  },
-  {
-    id: 8,
-    title: 'Executive Office Furniture',
-    price: '₦850,000',
-    originalPrice: '₦1,200,000',
-    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&auto=format&fit=crop',
-    category: 'Home & Garden',
-    location: 'Garki, Abuja',
-    posted: '4 days ago',
-    views: '1.3k',
-    likes: 42,
-    condition: 'Used - Good',
-    verifiedSeller: true,
+    title: 'Lhasa Apso Puppies',
+    price: '₦ 80,000',
+    location: 'Ibadan, Oyo',
+    condition: '8 Weeks Old',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuArqSjRYnu0tIVLIf9qe_ROyrYcAE62U7z5-jxBrR65gwxaAcJiMZ9ilr2hPaD9hprbwvEfNr3NXtOBRsRi7E_16mpMmvVFTeidXfLyK4FjZvpZmKMu7CcUY7PLYf5PXC6k8nZOw5grsX9yilzV8FSXjIRuO6JLQ2DM6zMBm4r-0lHIzC-javW6FNVcB3_CcS67TFRcd0lPl_GMPgi8xbG7YPJK13qHMDOs3wpXeR4r1lhzFXRWMDJswI4vFBhxMuWv0-K1K3UBMQ',
+    seller: { name: 'PetLover99', initial: 'P', color: 'bg-pink-500' },
   },
 ];
 
 export default function ProductsPage() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedLocation, setSelectedLocation] = useState('All Nigeria');
+  const [priceFilter, setPriceFilter] = useState('any');
+  const [conditionFilters, setConditionFilters] = useState(['Foreign Used']);
+  const [verifiedSeller, setVerifiedSeller] = useState(false);
   const [sortBy, setSortBy] = useState('Recommended');
-  const [showFilters, setShowFilters] = useState(false);
-  const [priceRange, setPriceRange] = useState('');
-  const [selectedCondition, setSelectedCondition] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const toggleCondition = (condition: string) => {
+    setConditionFilters(prev =>
+      prev.includes(condition)
+        ? prev.filter(c => c !== condition)
+        : [...prev, condition]
+    );
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Banner */}
-      <div className="bg-gradient-to-r from-primary to-secondary">
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Find Anything You Need
-          </h1>
-          <p className="text-white/90 text-lg mb-8">
-            Browse 50,000+ items from trusted sellers across Nigeria
-          </p>
-
-          {/* Search Bar */}
-          <div className="bg-white rounded-2xl p-2 max-w-3xl">
-            <div className="flex flex-col md:flex-row gap-2">
-              <div className="flex-1 flex items-center px-4">
-                <Search className="h-5 w-5 text-gray-400 mr-3" />
-                <input
-                  type="text"
-                  placeholder="What are you looking for?"
-                  className="w-full py-3 outline-none text-gray-900 placeholder-gray-500"
-                />
-              </div>
-              <div className="flex items-center border-l px-4">
-                <MapPin className="h-5 w-5 text-gray-400 mr-3" />
-                <select
-                  className="outline-none text-gray-900 bg-transparent"
-                  value={selectedLocation}
-                  onChange={(e) => setSelectedLocation(e.target.value)}
-                >
-                  {locations.map((loc) => (
-                    <option key={loc} value={loc}>{loc}</option>
-                  ))}
-                </select>
-              </div>
-              <button className="bg-primary text-white px-8 py-3 rounded-xl font-medium hover:bg-primary/90">
-                Search
-              </button>
+    <div className="min-h-screen bg-background-dark">
+      {/* Hero Section */}
+      <section className="pt-28 pb-12 bg-gradient-to-r from-primary via-[#cc4411] to-secondary relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
+        <div className="absolute -right-20 -top-20 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+        <div className="container mx-auto px-4 relative z-10 flex flex-col md:flex-row justify-between items-end gap-6">
+          <div>
+            <div className="flex items-center gap-2 text-white/80 text-sm font-medium mb-3">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <span className="material-symbols-outlined text-xs">chevron_right</span>
+              <Link href="/categories" className="hover:text-white transition-colors">Browse</Link>
+              <span className="material-symbols-outlined text-xs">chevron_right</span>
+              <span className="text-white">All Products</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight">Explore Marketplace</h1>
+            <p className="text-white/80 mt-2 max-w-xl font-body">Discover thousands of new and used items from verified sellers across Nigeria.</p>
+          </div>
+          <div className="hidden md:block w-full max-w-md">
+            <div className="relative group">
+              <input
+                className="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-xl py-3 pl-12 pr-4 text-white placeholder-white/60 focus:bg-white/20 focus:border-white/40 focus:ring-0 transition-all outline-none"
+                placeholder="What are you looking for?"
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/60">search</span>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Quick Categories */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-6">Browse Categories</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.name)}
-                className={`flex flex-col items-center p-4 rounded-xl transition-all ${
-                  selectedCategory === cat.name
-                    ? 'bg-gradient-to-br from-primary to-secondary text-white shadow-lg'
-                    : 'bg-white hover:shadow-md border hover:border-primary/20'
-                }`}
-              >
-                <span className="text-2xl mb-2">{cat.icon}</span>
-                <span className="font-medium text-sm text-center">{cat.name}</span>
-                <span className="text-xs mt-1 opacity-75">{cat.count}</span>
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-8">
+        {/* Filters Sidebar */}
+        <aside className="w-full lg:w-1/4 flex-shrink-0">
+          <div className="glass rounded-2xl p-6 sticky top-24 space-y-8">
+            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+              <h3 className="text-lg font-bold flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary">filter_list</span>
+                Filters
+              </h3>
+              <button className="text-xs text-primary hover:text-white transition-colors font-medium">
+                Reset All
               </button>
-            ))}
-          </div>
-        </div>
+            </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Filters Sidebar */}
-          <div className={`lg:w-1/4 ${showFilters ? 'block' : 'hidden lg:block'}`}>
-            <div className="bg-white rounded-2xl p-6 shadow-lg sticky top-24">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-bold flex items-center">
-                  <Sliders className="mr-2 h-5 w-5 text-primary" />
-                  Filters
-                </h3>
-                <button
-                  onClick={() => setShowFilters(false)}
-                  className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
-                >
-                  <X className="h-5 w-5" />
-                </button>
+            {/* Price Range */}
+            <div className="space-y-3">
+              <h4 className="text-sm font-bold text-white/80 uppercase tracking-wider">Price Range</h4>
+              <div className="space-y-2">
+                {[
+                  { value: 'any', label: 'Any Price' },
+                  { value: 'under-50k', label: 'Under ₦50,000' },
+                  { value: '50k-200k', label: '₦50k - ₦200k' },
+                  { value: '200k-1m', label: '₦200k - ₦1M' },
+                  { value: 'above-1m', label: 'Above ₦1M' },
+                ].map((option) => (
+                  <label key={option.value} className="flex items-center gap-3 cursor-pointer group">
+                    <input
+                      className="text-primary focus:ring-primary bg-transparent border-white/20"
+                      name="price"
+                      type="radio"
+                      checked={priceFilter === option.value}
+                      onChange={() => setPriceFilter(option.value)}
+                    />
+                    <span className="text-sm text-white/60 group-hover:text-white transition-colors">
+                      {option.label}
+                    </span>
+                  </label>
+                ))}
               </div>
+            </div>
 
-              {/* Price Range */}
-              <div className="mb-8">
-                <h4 className="font-semibold mb-4">Price Range</h4>
-                <div className="space-y-2">
-                  {priceRanges.map((range) => (
-                    <label key={range.value} className="flex items-center">
-                      <input
-                        type="radio"
-                        name="price"
-                        value={range.value}
-                        checked={priceRange === range.value}
-                        onChange={(e) => setPriceRange(e.target.value)}
-                        className="mr-3"
-                      />
-                      <span>{range.label}</span>
-                    </label>
-                  ))}
+            {/* Condition */}
+            <div className="space-y-3 pt-4 border-t border-white/10">
+              <h4 className="text-sm font-bold text-white/80 uppercase tracking-wider">Condition</h4>
+              <div className="space-y-2">
+                {['Brand New', 'Foreign Used', 'Nigerian Used', 'Refurbished'].map((condition) => (
+                  <label key={condition} className="flex items-center gap-3 cursor-pointer group">
+                    <input
+                      className="rounded text-primary focus:ring-primary bg-transparent border-white/20"
+                      type="checkbox"
+                      checked={conditionFilters.includes(condition)}
+                      onChange={() => toggleCondition(condition)}
+                    />
+                    <span className="text-sm text-white/60 group-hover:text-white transition-colors">
+                      {condition}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Verified Seller Toggle */}
+            <div className="pt-4 border-t border-white/10">
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold text-white">Verified Seller</span>
+                  <span className="text-xs text-white/40">Only show trusted</span>
                 </div>
-              </div>
-
-              {/* Condition */}
-              <div className="mb-8">
-                <h4 className="font-semibold mb-4">Condition</h4>
-                <div className="space-y-2">
-                  {conditionOptions.map((condition) => (
-                    <label key={condition} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        checked={selectedCondition === condition}
-                        onChange={(e) => setSelectedCondition(e.target.checked ? condition : '')}
-                        className="mr-3 rounded"
-                      />
-                      <span>{condition}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Verified Sellers Only */}
-              <div className="mb-8">
-                <label className="flex items-center">
-                  <input type="checkbox" className="mr-3 rounded" />
-                  <span className="font-medium">Verified Sellers Only</span>
-                  <ShieldCheck className="ml-2 h-4 w-4 text-green-500" />
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    className="sr-only peer"
+                    type="checkbox"
+                    checked={verifiedSeller}
+                    onChange={(e) => setVerifiedSeller(e.target.checked)}
+                  />
+                  <div className="w-11 h-6 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                 </label>
               </div>
+            </div>
 
-              {/* Location */}
-              <div className="mb-8">
-                <h4 className="font-semibold mb-4">Location</h4>
-                <div className="space-y-2 max-h-40 overflow-y-auto">
-                  {locations.map((loc) => (
-                    <label key={loc} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        className="mr-3 rounded"
-                      />
-                      <span>{loc}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
+            <button className="w-full lg:hidden py-3 bg-primary text-white rounded-lg font-bold mt-4">
+              Apply Filters
+            </button>
+          </div>
+        </aside>
 
-              <button className="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary/90">
-                Apply Filters
-              </button>
+        {/* Products Grid */}
+        <main className="w-full lg:w-3/4">
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+            <p className="text-white/60 text-sm">
+              Showing <span className="text-white font-bold">1-12</span> of <span className="text-white font-bold">452</span> results
+            </p>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-white/60">Sort by:</span>
+              <select
+                className="bg-dark-surface border border-white/10 text-white text-sm rounded-lg focus:ring-primary focus:border-primary block p-2.5 outline-none"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option>Recommended</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+                <option>Newest First</option>
+              </select>
             </div>
           </div>
 
-          {/* Products Grid */}
-          <div className="lg:w-3/4">
-            {/* Toolbar */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 bg-white p-4 rounded-xl shadow">
-              <div className="flex items-center space-x-4 mb-4 md:mb-0">
-                <button
-                  onClick={() => setShowFilters(true)}
-                  className="flex items-center lg:hidden px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200"
-                >
-                  <Filter className="h-4 w-4 mr-2" />
-                  Filters
-                </button>
-                <span className="text-gray-600">
-                  Showing <span className="font-bold">1-8</span> of <span className="font-bold">50,000+</span> items
-                </span>
-              </div>
-              <div className="flex items-center space-x-4">
-                <span className="text-gray-600">Sort by:</span>
-                <select
-                  className="border rounded-lg px-4 py-2"
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                >
-                  {sortOptions.map((option) => (
-                    <option key={option} value={option}>{option}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            {/* Products Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
-                <div
-                  key={product.id}
-                  className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                >
-                  {/* Image Container */}
-                  <div className="relative h-64">
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                    
-                    {/* Badges */}
-                    <div className="absolute top-3 left-3 flex flex-col gap-2">
-                      {product.premium && (
-                        <span className="inline-flex items-center bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                          <Sparkles className="h-3 w-3 mr-1" />
-                          PREMIUM
-                        </span>
-                      )}
-                      {product.urgent && (
-                        <span className="inline-flex items-center bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                          URGENT
-                        </span>
-                      )}
-                      {product.trending && (
-                        <span className="inline-flex items-center bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                          <TrendingUp className="h-3 w-3 mr-1" />
-                          TRENDING
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="absolute top-3 right-3 flex gap-2">
-                      <button className="p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white">
-                        <Heart className="h-4 w-4" />
-                      </button>
-                      <button className="p-2 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white">
-                        <Eye className="h-4 w-4" />
-                      </button>
-                    </div>
-
-                    {/* Category */}
-                    <div className="absolute bottom-3 left-3">
-                      <span className="inline-block bg-black/60 text-white px-3 py-1 rounded-full text-xs">
-                        {product.category}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="bg-dark-surface rounded-xl overflow-hidden group hover:scale-[1.02] transition-all duration-300 border border-white/5 hover:border-primary/50 hover:shadow-[0_10px_30px_-10px_rgba(255,105,51,0.15)] flex flex-col"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    alt={product.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    src={product.image}
+                  />
+                  {product.badge && (
+                    <div className={`absolute top-3 left-3 ${
+                      product.badge.type === 'premium' 
+                        ? 'bg-[#FFD700] text-black' 
+                        : 'bg-red-600 text-white'
+                    } text-xs font-bold px-2 py-1 rounded shadow-lg flex items-center gap-1`}>
+                      <span className="material-symbols-outlined text-[14px]">
+                        {product.badge.type === 'premium' ? 'stars' : 'local_fire_department'}
                       </span>
+                      {product.badge.label}
                     </div>
-                  </div>
-
-                  {/* Product Details */}
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="font-bold text-lg hover:text-primary transition-colors">
-                        {product.title}
-                      </h3>
-                      {product.verifiedSeller && (
-                        <ShieldCheck className="h-5 w-5 text-green-500" />
-                      )}
-                    </div>
-
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <div className="text-2xl font-bold text-primary">{product.price}</div>
-                        {product.originalPrice && (
-                          <div className="text-sm text-gray-500 line-through">{product.originalPrice}</div>
-                        )}
-                      </div>
-                      <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                        {product.condition}
-                      </span>
-                    </div>
-
-                    {/* Stats */}
-                    <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                      <div className="flex items-center space-x-4">
-                        <span className="flex items-center">
-                          <Eye className="h-4 w-4 mr-1" />
-                          {product.views}
-                        </span>
-                        <span className="flex items-center">
-                          <Heart className="h-4 w-4 mr-1" />
-                          {product.likes}
-                        </span>
-                      </div>
-                      <span className="flex items-center">
-                        <Clock className="h-4 w-4 mr-1" />
-                        {product.posted}
-                      </span>
-                    </div>
-
-                    {/* Location & Action */}
-                    <div className="flex items-center justify-between pt-4 border-t">
-                      <div className="flex items-center">
-                        <MapPin className="h-4 w-4 text-gray-400 mr-2" />
-                        <span className="text-sm text-gray-600">{product.location}</span>
-                      </div>
-                      <button className="bg-primary text-white px-6 py-2 rounded-lg font-medium hover:bg-primary/90">
-                        View Details
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Pagination */}
-            <div className="flex justify-center mt-12">
-              <nav className="flex items-center space-x-2">
-                <button className="px-4 py-2 border rounded-lg hover:bg-gray-50">Previous</button>
-                {[1, 2, 3, '...', 8, 9, 10].map((num, idx) => (
-                  <button
-                    key={idx}
-                    className={`px-4 py-2 border rounded-lg ${
-                      num === 1
-                        ? 'bg-primary text-white border-primary'
-                        : 'hover:bg-gray-50'
-                    }`}
-                  >
-                    {num}
+                  )}
+                  <button className="absolute top-3 right-3 p-2 bg-black/40 backdrop-blur-sm rounded-full text-white/70 hover:text-white hover:bg-primary transition-colors">
+                    <span className="material-symbols-outlined text-[18px]">favorite</span>
                   </button>
-                ))}
-                <button className="px-4 py-2 border rounded-lg hover:bg-gray-50">Next</button>
-              </nav>
-            </div>
-
-            {/* Newsletter CTA */}
-            <div className="mt-12 bg-gradient-to-r from-primary to-secondary rounded-2xl p-8 text-center">
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Get Notified of New Deals
-              </h3>
-              <p className="text-white/90 mb-6">
-                Subscribe to receive alerts when items matching your interests are posted
-              </p>
-              <div className="max-w-md mx-auto flex gap-3">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="flex-1 px-4 py-3 rounded-lg"
-                />
-                <button className="bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-gray-100">
-                  Subscribe
-                </button>
+                </div>
+                <div className="p-4 flex flex-col flex-grow">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-bold text-white group-hover:text-primary transition-colors line-clamp-1">
+                      {product.title}
+                    </h3>
+                  </div>
+                  <p className="text-2xl font-black text-white mb-2">{product.price}</p>
+                  <div className="flex items-center gap-1 text-white/50 text-xs mb-4">
+                    <span className="material-symbols-outlined text-[14px]">location_on</span>
+                    <span>{product.location}</span>
+                    <span className="w-1 h-1 bg-white/20 rounded-full mx-1"></span>
+                    <span>{product.condition}</span>
+                  </div>
+                  <div className="mt-auto pt-3 border-t border-white/5 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className={`size-6 rounded-full ${product.seller.color} flex items-center justify-center text-xs text-white`}>
+                        {product.seller.initial}
+                      </div>
+                      <span className="text-xs text-white/60">{product.seller.name}</span>
+                    </div>
+                    <button className="text-primary text-sm font-bold hover:underline">
+                      View Details
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        </div>
+
+          {/* Pagination */}
+          <div className="mt-12 flex justify-center">
+            <nav className="flex items-center gap-2">
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 text-white/60 hover:bg-white/5 hover:text-white transition-colors">
+                <span className="material-symbols-outlined text-sm">chevron_left</span>
+              </button>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 text-white/60 hover:bg-white/5 hover:text-white transition-colors">2</button>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 text-white/60 hover:bg-white/5 hover:text-white transition-colors">3</button>
+              <span className="text-white/40 px-2">...</span>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 text-white/60 hover:bg-white/5 hover:text-white transition-colors">12</button>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border border-white/10 text-white/60 hover:bg-white/5 hover:text-white transition-colors">
+                <span className="material-symbols-outlined text-sm">chevron_right</span>
+              </button>
+            </nav>
+          </div>
+        </main>
       </div>
     </div>
   );

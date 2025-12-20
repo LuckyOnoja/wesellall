@@ -1,446 +1,310 @@
- 'use client';
+'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
-import {
-  Upload,
-  Camera,
-  DollarSign,
-  Tag,
-  MapPin,
-  CheckCircle,
-  Shield,
-  Zap,
-  TrendingUp,
-  Users,
-  Star,
-  ArrowRight,
-  ChevronRight,
-  Award,
-  BarChart3,
-  Clock,
-  Smartphone,
-  Truck,
-} from 'lucide-react';
 
-const successStories = [
-  {
-    name: 'Ahmed Bello',
-    business: 'AutoConnect Lagos',
-    revenue: '₦12.5M',
-    period: 'first month',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&facepad=2',
-  },
-  {
-    name: 'Chioma Okonkwo',
-    business: 'TechGadgets NG',
-    revenue: '₦8.2M',
-    period: '30 days',
-    image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&auto=format&fit=crop&facepad=2',
-  },
-  {
-    name: 'Tunde Williams',
-    business: 'Prime Properties',
-    revenue: '₦45M',
-    period: 'quarter',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop&facepad=2',
-  },
-];
-
-const features = [
-  {
-    icon: Zap,
-    title: 'List in 2 Minutes',
-    description: 'Upload photos, add details, and publish your listing instantly.',
-  },
-  {
-    icon: Shield,
-    title: 'Verified Badge',
-    description: 'Build trust with buyers using our verification system.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Boost Visibility',
-    description: 'Pay to feature your listings and reach more buyers.',
-  },
-  {
-    icon: Users,
-    title: 'Large Audience',
-    description: 'Access over 500,000 active buyers across Nigeria.',
-  },
-  {
-    icon: BarChart3,
-    title: 'Analytics Dashboard',
-    description: 'Track views, inquiries, and optimize your listings.',
-  },
-  {
-    icon: Truck,
-    title: 'Delivery Options',
-    description: 'Offer nationwide delivery through our partners.',
-  },
-];
-
-const steps = [
-  {
-    number: '01',
-    title: 'Sign Up Free',
-    description: 'Create your seller account in 2 minutes',
-    icon: Users,
-  },
-  {
-    number: '02',
-    title: 'List Your Items',
-    description: 'Upload photos and add product details',
-    icon: Camera,
-  },
-  {
-    number: '03',
-    title: 'Set Your Price',
-    description: 'Choose competitive pricing for quick sales',
-    icon: Tag,
-  },
-  {
-    number: '04',
-    title: 'Start Selling',
-    description: 'Receive offers and close deals securely',
-    icon: DollarSign,
-  },
-];
+const categories = ['Electronics', 'Fashion', 'Vehicles', 'Home'];
 
 export default function SellPage() {
-  const [showCalculator, setShowCalculator] = useState(false);
-  const [itemValue, setItemValue] = useState('500000');
+  const [itemsPerMonth, setItemsPerMonth] = useState(15);
+  const [avgPrice, setAvgPrice] = useState(25000);
+  const [selectedCategory, setSelectedCategory] = useState('Electronics');
 
-  const calculateEarnings = (value: string) => {
-    const numValue = parseInt(value) || 0;
-    return {
-      basic: Math.floor(numValue * 0.95),
-      featured: Math.floor(numValue * 0.98),
-      premium: Math.floor(numValue),
-    };
-  };
-
-  const earnings = calculateEarnings(itemValue);
+  const estimatedEarnings = Math.floor((itemsPerMonth * avgPrice * 0.95) / 1000); // 95% after fees
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary to-secondary">
-        <div className="max-w-7xl mx-auto px-4 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-6 py-2 mb-6">
-                <DollarSign className="h-5 w-5 text-white mr-2" />
-                <span className="text-white font-medium">START EARNING TODAY</span>
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                Sell Anything, <br />
-                <span className="text-yellow-300">Earn Money Fast</span>
-              </h1>
-              
-              <p className="text-white/90 text-lg mb-8">
-                Join 50,000+ Nigerian sellers making money daily. No listing fees, 
-                no commission on basic sales. Get paid directly to your bank account.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/register"
-                  className="inline-flex items-center justify-center bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 hover:scale-105 transition-all"
-                >
-                  Start Selling Free
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-                <button
-                  onClick={() => setShowCalculator(!showCalculator)}
-                  className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all"
-                >
-                  <DollarSign className="mr-2 h-5 w-5" />
-                  Calculate Earnings
-                </button>
-              </div>
-            </div>
-
-            {/* Success Stories */}
-            <div className="space-y-6">
-              <h3 className="text-white text-2xl font-bold mb-8">Recent Success Stories</h3>
-              {successStories.map((story, idx) => (
-                <div key={idx} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                  <div className="flex items-center space-x-4">
-                    <img
-                      src={story.image}
-                      alt={story.name}
-                      className="w-16 h-16 rounded-full object-cover"
-                    />
-                    <div className="flex-1">
-                      <h4 className="font-bold text-white">{story.name}</h4>
-                      <p className="text-white/80 text-sm">{story.business}</p>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-yellow-300">{story.revenue}</div>
-                      <p className="text-white/60 text-sm">{story.period}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      <section className="relative min-h-screen pt-20 flex items-center bg-background-dark overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/10 blur-[120px]"></div>
+          <div className="absolute bottom-0 left-0 w-1/3 h-2/3 bg-primary/5 blur-[100px]"></div>
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
         </div>
-      </div>
-
-      {/* Earnings Calculator */}
-      {showCalculator && (
-        <div className="max-w-4xl mx-auto px-4 -mt-8 mb-12">
-          <div className="bg-white rounded-2xl shadow-2xl p-8">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold">Earnings Calculator</h3>
-              <button
-                onClick={() => setShowCalculator(false)}
-                className="text-gray-400 hover:text-gray-600"
+        <div className="container mx-auto px-4 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-6">
+              <span className="material-symbols-outlined text-sm">trending_up</span>
+              <span>Join 50,000+ Sellers</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6">
+              Sell Anything, <br/>
+              <span className="text-gradient">Earn Money Fast.</span>
+            </h1>
+            <p className="text-xl text-white/60 mb-8 font-body max-w-lg">
+              Turn your unwanted items into cash or start a full-time business. WeSellAll connects you with millions of buyers across Nigeria instantly.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/register"
+                className="h-14 px-8 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 text-lg"
               >
-                ✕
+                Start Selling Now
+              </Link>
+              <button className="h-14 px-8 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-lg">
+                <span className="material-symbols-outlined">play_circle</span>
+                Watch Guide
               </button>
             </div>
+            <div className="mt-12 flex items-center gap-6 text-sm text-white/40 font-medium">
+              <div className="flex -space-x-3">
+                <img alt="User" className="w-10 h-10 rounded-full border-2 border-background-dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt_ukvJzccnTlcGPpb-kPbGMW5VOvL7NZKfDHjov68qTbx5m9lwSQUEtxQCWWQX3WX0tEiwUJRhb1MrysazVpBjme70CxHN5PXI6M-BmlHXmwjRcR8u8nHW2dmtM1TSdH-uWht04QyVeocn6VQpEgIwx2QHRrd-lZ5Q-6cshLFsu7jOKN3zJszRJefsNWaheKLpyIKkY_84HyAv7DkFvk1jGg7Yu9HZXQ1LjSYyxUlkpSJrWTZb39TC_2S-lV_lZNoFGdoEkivKQ" />
+                <img alt="User" className="w-10 h-10 rounded-full border-2 border-background-dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5VcpEkjj-xl7bBmY8sYvCRCn1EIdRhGR9IqaWcCTEs1hKnI89FM0O0DUOvzk6OwxRzoQWXVY2GogYcpU-k7Od_C-7aEAfnfHTImgZiWj0tJG2IMMZj82jkqoIgtSSsi547rOf7XvO6khNbpNQa4pN_rbgtwrOBvNuGLtQYVXjoFoKVFAWqJEygwTBtDtwkaGY4p6ADcZXUOeYdfVEVB5LZ4lH6rHodHQb7wue7dp_6gce1ABe-nWhNbB0u_Fv8n9xndpm5MiKaA" />
+                <img alt="User" className="w-10 h-10 rounded-full border-2 border-background-dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDROpaGRpZO9K-frH1IF7Pv2F2R9nc5RIXyyHAlGZ6JBm6iSGSqHqKOj9g65mixuL2J2HgjfXOOkO1OzOBtFTIbkWYm3EUhwvE-rMKp4GnZHcTBM5liTdslJUU-uwvZPPXR3goVHboEq9IfC58BKtLvBHL89d1ExKbOUfXjXTrOJrft_b9lcv4XEdnAm12pkguiaB3SlwJrochzOtGk5lnS7xILoyMQmsDLpSddnjHJgFDBsvXH0Aqz2l9-1nOGZcTZ7-vvU4cHag" />
+                <div className="w-10 h-10 rounded-full border-2 border-background-dark bg-dark-surface flex items-center justify-center text-xs text-white font-bold">+2k</div>
+              </div>
+              <p>New sellers joined this week</p>
+            </div>
+          </div>
+          <div className="relative lg:h-[600px] flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-full blur-3xl opacity-30 transform scale-75"></div>
             
-            <div className="mb-8">
-              <label className="block text-sm font-medium text-gray-700 mb-4">
-                What's the value of your item?
-              </label>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500">₦</span>
-                <input
-                  type="range"
-                  min="10000"
-                  max="50000000"
-                  step="10000"
-                  value={itemValue}
-                  onChange={(e) => setItemValue(e.target.value)}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between mt-2 text-sm text-gray-500">
-                  <span>₦10,000</span>
-                  <span>₦50,000,000</span>
+            {/* Success Card 1 */}
+            <div className="absolute top-[20%] right-[10%] w-72 p-4 bg-dark-surface border border-white/5 rounded-2xl shadow-2xl transform rotate-6 opacity-60 scale-90 z-0">
+              <div className="flex items-center gap-3 mb-3">
+                <img alt="Seller" className="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxXZWwJEEbkBw26LIwVOvjWrdzGXjqHU0U-OMduDfk3Q6g33Wd7zw8siKvgKnilN-F_vOJIua2fAO9uZokKJQiyY7LkFwBrNWaAZsZjQMdK-KiFyvUJ312-rjdJCzzvJ1c5zVOSIGeBPr8ECv565z3vUs6fu-njrXlgPxV2ecobhqLGgpn8mWby_oVP5TvGu2f77rIoGkhY67lShIz4td1Lmo5zOez9fPrXzyA4CrzcFJsyI76GybFT5fiSLVo35tZTbAa-McJaw" />
+                <div>
+                  <h4 className="font-bold text-white">Chidi Okafor</h4>
+                  <p className="text-xs text-white/50">Electronics Dealer</p>
                 </div>
               </div>
-              <div className="text-center mt-4">
-                <div className="text-3xl font-bold text-primary">₦{parseInt(itemValue).toLocaleString()}</div>
-                <div className="text-gray-600">Item Value</div>
+              <div className="bg-background-dark/50 rounded-lg p-3">
+                <p className="text-xs text-white/60 mb-1">Monthly Revenue</p>
+                <p className="text-xl font-bold text-green-400">₦ 1,250,000</p>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-gray-50 rounded-xl p-6">
-                <div className="text-center mb-4">
-                  <div className="text-sm text-gray-600 mb-2">Basic Listing</div>
-                  <div className="text-2xl font-bold text-primary">₦{earnings.basic.toLocaleString()}</div>
-                  <div className="text-sm text-gray-500">You earn 95%</div>
+            {/* Success Card 2 */}
+            <div className="absolute top-[30%] left-[5%] w-72 p-4 bg-dark-surface border border-white/5 rounded-2xl shadow-2xl transform -rotate-3 opacity-80 scale-95 z-10">
+              <div className="flex items-center gap-3 mb-3">
+                <img alt="Seller" className="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTJ35gvTlv6obRLsFljsP8so-QkGEgr-dkkd50EZSYTJxDvJiq9CWS89FRHR5GqMDjExPfxgWqM2v7R21S97vl3eCcXgHour_uLm5n16-OnFdrGzMzCznyiXuaVlWOh4hEhTvJEsZlR73UYOTUhDUd33NKpDmIXnve4HatMelWl0RgpoGe4PpodGv5f7Gv6d8kvS1yU7RdJqM1JoGxSBYu4jL2fPbmFhwOd8Qh_o44fq-rc3x28GmXxg3My9KmKyRAjlG9J3N61A" />
+                <div>
+                  <h4 className="font-bold text-white">Amina Bello</h4>
+                  <p className="text-xs text-white/50">Fashion Vendor</p>
                 </div>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Free listing
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Standard visibility
-                  </li>
-                </ul>
               </div>
-
-              <div className="bg-gradient-to-br from-primary to-secondary rounded-xl p-6 text-white">
-                <div className="text-center mb-4">
-                  <div className="text-sm text-white/80 mb-2">Featured Listing</div>
-                  <div className="text-2xl font-bold">₦{earnings.featured.toLocaleString()}</div>
-                  <div className="text-sm text-white/80">You earn 98%</div>
-                </div>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-white mr-2" />
-                    Priority placement
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-white mr-2" />
-                    5x more views
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-white mr-2" />
-                    Seller badge
-                  </li>
-                </ul>
+              <div className="bg-background-dark/50 rounded-lg p-3">
+                <p className="text-xs text-white/60 mb-1">Items Sold</p>
+                <p className="text-xl font-bold text-primary">145 Items</p>
               </div>
+            </div>
 
-              <div className="bg-yellow-50 rounded-xl p-6">
-                <div className="text-center mb-4">
-                  <div className="text-sm text-gray-600 mb-2">Premium Listing</div>
-                  <div className="text-2xl font-bold text-primary">₦{earnings.premium.toLocaleString()}</div>
-                  <div className="text-sm text-gray-500">You earn 100%</div>
+            {/* Top Seller Card */}
+            <div className="relative w-80 p-6 bg-[#2a1a14] border border-white/10 rounded-3xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] z-20 animate-float">
+              <div className="absolute -top-3 -right-3 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">Top Seller</div>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="relative">
+                  <img alt="Seller" className="w-14 h-14 rounded-full object-cover ring-2 ring-primary/50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_gxq2CCM8VEsF4wORJOmlYZFBrm0pUwOB1t1ZYRbFjKZzdXaDbD9E-53W2vdqfV-q6mbk6bylIHNUVafJyXrgqYuBjRzM1Dojn5VshMTy834w3taPpcRlT_j3LCit8yQdcEOAhzjYTEp5UTnVqFn01pEEmcZ7aZrg7HWrjxMQv5leL6zl_2R3jgpacAKG79d0M1boC2yX5X9a9WcGIAZrFEGDwB74AOEEF6dHEBJBtmBAxgFxMQ4Z8TxvvUNVApAZUKuW1lFz-Q" />
+                  <div className="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-[#2a1a14]"></div>
                 </div>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Homepage feature
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Top search results
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    Dedicated support
-                  </li>
-                </ul>
+                <div>
+                  <h4 className="text-lg font-bold text-white">Sarah Jenkins</h4>
+                  <p className="text-sm text-white/50">Home & Decor</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="bg-black/30 rounded-xl p-4 border border-white/5">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-white/60">Total Sales</span>
+                    <span className="material-symbols-outlined text-green-400 text-sm">trending_up</span>
+                  </div>
+                  <p className="text-3xl font-bold text-white">₦ 4.2M</p>
+                  <p className="text-xs text-green-400 mt-1">+12% from last month</p>
+                </div>
+                <div className="flex gap-2">
+                  <span className="px-3 py-1 rounded-lg bg-white/5 text-xs text-white/70 border border-white/5">Fast Shipper</span>
+                  <span className="px-3 py-1 rounded-lg bg-white/5 text-xs text-white/70 border border-white/5">Verified</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      )}
+      </section>
 
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* How It Works */}
-        <div className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-12">Start Selling in 4 Easy Steps</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {steps.map((step, idx) => {
-              const Icon = step.icon;
-              return (
-                <div key={idx} className="relative">
-                  <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                    <div className="text-5xl font-bold text-gray-200 mb-4">{step.number}</div>
-                    <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mb-6">
-                      <Icon className="h-6 w-6 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                    <p className="text-gray-600">{step.description}</p>
+      {/* Earnings Calculator Section */}
+      <section className="py-24 bg-dark-surface relative overflow-hidden" id="calculator">
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto bg-background-dark rounded-3xl p-8 md:p-12 border border-white/5 shadow-2xl relative">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Calculate Your Potential</h2>
+              <p className="text-white/60">Estimate how much you could earn selling on WeSellAll.</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-8">
+                {/* Items per month slider */}
+                <div>
+                  <div className="flex justify-between mb-4">
+                    <label className="font-medium text-white">Items to sell per month</label>
+                    <span className="text-primary font-bold text-xl">{itemsPerMonth}</span>
                   </div>
-                  {idx < steps.length - 1 && (
-                    <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-primary to-secondary" />
-                  )}
+                  <input
+                    className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                    max="100"
+                    min="1"
+                    type="range"
+                    value={itemsPerMonth}
+                    onChange={(e) => setItemsPerMonth(Number(e.target.value))}
+                  />
                 </div>
-              );
-            })}
+
+                {/* Average price slider */}
+                <div>
+                  <div className="flex justify-between mb-4">
+                    <label className="font-medium text-white">Average item price</label>
+                    <span className="text-primary font-bold text-xl">₦ {avgPrice.toLocaleString()}</span>
+                  </div>
+                  <input
+                    className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                    max="500000"
+                    min="1000"
+                    step="1000"
+                    type="range"
+                    value={avgPrice}
+                    onChange={(e) => setAvgPrice(Number(e.target.value))}
+                  />
+                </div>
+
+                {/* Category selection */}
+                <div className="pt-4">
+                  <label className="font-medium text-white mb-3 block">Category</label>
+                  <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                    {categories.map((cat) => (
+                      <button
+                        key={cat}
+                        onClick={() => setSelectedCategory(cat)}
+                        className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+                          selectedCategory === cat
+                            ? 'bg-primary text-white'
+                            : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Earnings Display */}
+              <div className="bg-[#2a1a14] border border-white/5 rounded-2xl p-8 text-center relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <p className="text-white/60 text-sm font-medium uppercase tracking-wider mb-2 relative z-10">
+                  Estimated Monthly Earnings
+                </p>
+                <h3 className="text-5xl md:text-6xl font-black text-white mb-2 relative z-10">
+                  ₦ {estimatedEarnings}<span className="text-2xl text-white/40">k</span>
+                </h3>
+                <p className="text-green-400 text-sm mb-6 flex items-center justify-center gap-1 relative z-10">
+                  <span className="material-symbols-outlined text-sm">trending_up</span>
+                  Potential for +20% growth
+                </p>
+                <Link
+                  href="/register"
+                  className="w-full py-3 bg-white text-background-dark font-bold rounded-xl hover:bg-gray-100 transition-colors relative z-10 block"
+                >
+                  Start Earning Today
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Features */}
-        <div className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-12">Why Sell on WeSellAll?</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, idx) => {
-              const Icon = feature.icon;
-              return (
-                <div key={idx} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="w-12 h-12 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg flex items-center justify-center mb-6">
-                    <Icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
-                </div>
-              );
-            })}
+      {/* How It Works Section */}
+      <section className="py-24 bg-background-dark relative" id="how-it-works">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-5xl font-black mb-6">How It Works</h2>
+            <p className="text-lg text-white/60">From listing to cashing out, we've simplified the entire process so you can focus on making money.</p>
           </div>
-        </div>
-
-        {/* What You Can Sell */}
-        <div className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-12">What Can You Sell?</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="grid md:grid-cols-4 gap-8">
             {[
-              { icon: '🚗', label: 'Cars' },
-              { icon: '📱', label: 'Phones' },
-              { icon: '🏠', label: 'Houses' },
-              { icon: '💻', label: 'Laptops' },
-              { icon: '👗', label: 'Fashion' },
-              { icon: '🛋️', label: 'Furniture' },
-              { icon: '🎮', label: 'Games' },
-              { icon: '⚽', label: 'Sports' },
-              { icon: '📚', label: 'Books' },
-              { icon: '🎨', label: 'Art' },
-              { icon: '🔧', label: 'Tools' },
-              { icon: '🎵', label: 'Music' },
-            ].map((item, idx) => (
-              <div key={idx} className="bg-white rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
-                <div className="text-3xl mb-3">{item.icon}</div>
-                <div className="font-medium">{item.label}</div>
+              { number: '1', color: 'primary', title: 'Create Account', desc: 'Sign up in seconds using your email or social media. Verify your identity to build trust.' },
+              { number: '2', color: 'secondary', title: 'List Your Item', desc: 'Take photos, add a description, and set your price. Our AI suggests the best categories.' },
+              { number: '3', color: 'purple', title: 'Connect & Sell', desc: 'Chat with interested buyers through our secure messaging system and agree on a deal.' },
+              { number: '4', color: 'green', title: 'Get Paid', desc: 'Meet safely or ship the item. Receive payment directly to your bank account instantly.' },
+            ].map((step, idx) => (
+              <div key={idx} className="relative group">
+                <div className="h-full p-6 bg-dark-surface border border-white/5 rounded-2xl hover:border-primary/30 transition-all duration-300 hover:-translate-y-2">
+                  <div className={`size-14 rounded-full ${
+                    step.color === 'primary' ? 'bg-primary/10 text-primary border-primary/20' :
+                    step.color === 'secondary' ? 'bg-secondary/10 text-secondary border-secondary/20' :
+                    step.color === 'purple' ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' :
+                    'bg-green-500/10 text-green-400 border-green-500/20'
+                  } font-bold text-xl flex items-center justify-center mb-6 border`}>
+                    {step.number}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
+                  <p className="text-white/60 text-sm leading-relaxed">{step.desc}</p>
+                </div>
+                {idx < 3 && (
+                  <div className="hidden md:block absolute top-12 -right-4 w-8 h-[2px] bg-white/10 z-0"></div>
+                )}
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* CTA Section */}
-        <div className="bg-gradient-to-r from-primary to-secondary rounded-3xl p-12 text-center text-white">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold mb-6">Ready to Start Earning?</h2>
-            <p className="text-white/90 text-lg mb-8">
-              Join thousands of successful sellers. Your first 5 listings are completely free!
-            </p>
-            
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                <div className="text-3xl font-bold mb-2">₦0</div>
-                <div className="font-medium mb-2">Listing Fee</div>
-                <div className="text-sm text-white/80">First 5 listings free</div>
+      {/* What Can You Sell Section */}
+      <section className="py-24 bg-[#1e110c] border-y border-white/5" id="categories">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">What Can You Sell?</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {[
+              { icon: '📱', label: 'Phones' },
+              { icon: '🚗', label: 'Cars' },
+              { icon: '💻', label: 'Laptops' },
+              { icon: '👠', label: 'Fashion' },
+              { icon: '🛋️', label: 'Furniture' },
+              { icon: '📷', label: 'Cameras' },
+              { icon: '🎮', label: 'Gaming' },
+              { icon: '🏠', label: 'Real Estate' },
+              { icon: '🔧', label: 'Tools' },
+              { icon: '📚', label: 'Books' },
+              { icon: '👶', label: 'Baby Items' },
+              { icon: '🐶', label: 'Pets' },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="p-6 rounded-xl bg-dark-surface border border-white/5 hover:bg-white/5 hover:border-primary/50 transition-all cursor-pointer group flex flex-col items-center text-center"
+              >
+                <span className="text-4xl mb-3 transform group-hover:scale-110 transition-transform">{item.icon}</span>
+                <span className="font-bold text-white group-hover:text-primary transition-colors">{item.label}</span>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                <div className="text-3xl font-bold mb-2">95%</div>
-                <div className="font-medium mb-2">You Keep</div>
-                <div className="text-sm text-white/80">On basic sales</div>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                <div className="text-3xl font-bold mb-2">24h</div>
-                <div className="font-medium mb-2">Support</div>
-                <div className="text-sm text-white/80">Dedicated seller support</div>
-              </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
+      {/* CTA Section */}
+      <section className="py-32 relative overflow-hidden bg-background-dark">
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-background-dark to-background-dark"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-[400px] bg-[radial-gradient(circle_at_bottom,_var(--tw-gradient-stops))] from-primary/30 to-transparent opacity-60"></div>
+        <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
+          <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+            Ready to start your <br/>
+            <span className="text-primary">Selling Journey?</span>
+          </h2>
+          <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto">
+            Join the fastest growing marketplace in Nigeria today. No listing fees for your first 5 items.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <Link
               href="/register"
-              className="inline-flex items-center bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 hover:scale-105 transition-all"
+              className="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-primary to-orange-600 hover:from-orange-500 hover:to-primary text-white text-xl font-bold rounded-full shadow-[0_0_40px_rgba(255,105,51,0.4)] transition-all hover:scale-105 active:scale-95"
             >
-              Start Selling Now - It's Free!
-              <ArrowRight className="ml-2 h-5 w-5" />
+              Create Seller Account
             </Link>
+            <button className="w-full sm:w-auto px-10 py-5 bg-white/5 border border-white/10 hover:bg-white/10 text-white text-xl font-bold rounded-full backdrop-blur-sm transition-all">
+              Download App
+            </button>
           </div>
+          <p className="mt-6 text-sm text-white/40">No credit card required for basic account.</p>
         </div>
-
-        {/* FAQ */}
-        <div className="mt-20">
-          <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                q: 'How much does it cost to list an item?',
-                a: 'The first 5 listings are completely free! After that, basic listings remain free. We only charge for premium features like boosting your listings.',
-              },
-              {
-                q: 'How do I get paid?',
-                a: 'You get paid directly to your Nigerian bank account. We support transfers to all major Nigerian banks.',
-              },
-              {
-                q: 'How long does it take to sell an item?',
-                a: 'Most items sell within 3-7 days. Featured listings typically sell 5x faster.',
-              },
-              {
-                q: 'Is it safe to sell online?',
-                a: 'Yes! We have a verified seller system, secure messaging, and buyer protection policies to ensure safe transactions.',
-              },
-              {
-                q: 'Can I sell services too?',
-                a: 'Absolutely! You can list services like plumbing, photography, tutoring, and more.',
-              },
-              {
-                q: 'Do you offer seller support?',
-                a: 'Yes, we have 24/7 seller support via WhatsApp, email, and phone.',
-              },
-            ].map((faq, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-6 shadow-lg">
-                <h3 className="font-bold text-lg mb-3">{faq.q}</h3>
-                <p className="text-gray-600">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      </section>
     </div>
   );
 }
