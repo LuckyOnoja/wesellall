@@ -12,6 +12,10 @@
   --dark-input: #1a0f0b;
   --dark-card: #362019;
   --dark-elevated: #3a241c;
+  --surface-light: #f8fafc;
+  --surface-dark: #1e293b;
+  --border-light: #e2e8f0;
+  --border-dark: #334155;
 }
 
 @theme inline {
@@ -30,6 +34,10 @@
   --color-dark-input: var(--dark-input);
   --color-dark-card: var(--dark-card);
   --color-dark-elevated: var(--dark-elevated);
+  --color-surface-light: var(--surface-light);
+  --color-surface-dark: var(--surface-dark);
+  --color-border-light: var(--border-light);
+  --color-border-dark: var(--border-dark);
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-2xl: 1rem;
@@ -37,16 +45,17 @@
   --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }
 
-@media (prefers-color-scheme: dark) {
+/* Disable automatic dark mode - we want light theme by default */
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #01082a;
     --foreground: #ffffff;
   }
-}
+} */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #ffffff;
+  color: #171717;
   font-family: var(--font-space-grotesk), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
 }

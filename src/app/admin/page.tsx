@@ -240,24 +240,25 @@ export default function AdminDashboard() {
                     <div className="flex-1 space-y-6">
                       <div>
                         <div className="flex justify-between items-start">
-                          <h2 className="text-2xl font-bold text-white mb-2">{pendingListings[0].title}</h2>
-                          <div className="text-2xl font-display font-bold text-primary">{pendingListings[0].price}</div>
+                          <h2 className="text-2xl font-bold text-white mb-2">{pendingListings[0]?.title}</h2>
+                          <div className="text-2xl font-display font-bold text-primary">{pendingListings[0]?.price}</div>
                         </div>
                         <div className="flex items-center gap-4 text-sm text-white/60 mb-4">
                           <span className="flex items-center gap-1">
-                            <span className="material-symbols-outlined text-[16px]">category</span> {pendingListings[0].category}
+                            <span className="material-symbols-outlined text-[16px]">category</span> {pendingListings[0]?.category}
                           </span>
                           <span className="w-1 h-1 rounded-full bg-white/20"></span>
                           <span className="flex items-center gap-1">
-                            <span className="material-symbols-outlined text-[16px]">location_on</span> {pendingListings[0].location}
+                            <span className="material-symbols-outlined text-[16px]">location_on</span> {pendingListings[0]?.location}
                           </span>
                           <span className="w-1 h-1 rounded-full bg-white/20"></span>
                           <span className="text-white/40">ID: 8823910</span>
                         </div>
                         <p className="text-white/80 leading-relaxed text-sm bg-dark-surface p-4 rounded-lg border border-white/5">
-                          {pendingListings[0].description}
+                          {pendingListings[0]?.description}
                         </p>
                       </div>
+                      {pendingListings[0]?.seller && (
                       <div className="bg-dark-elevated rounded-lg p-4 flex items-center justify-between border border-white/5">
                         <div className="flex items-center gap-3">
                           <div className="size-10 rounded-full bg-secondary flex items-center justify-center text-white font-bold">
@@ -288,6 +289,7 @@ export default function AdminDashboard() {
                           </div>
                         </div>
                       </div>
+                      )}
                       <div className="grid grid-cols-2 gap-4 pt-2">
                         <button className="glass-button-danger py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
                           <span className="material-symbols-outlined">close</span>
@@ -388,3 +390,393 @@ export default function AdminDashboard() {
     </div>
   );
 }
+
+                    </div>
+
+                    <div className="flex gap-2">
+
+                      <button
+
+                        className="size-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/60 transition-colors"
+
+                        title="Flag User"
+
+                      >
+
+                        <span className="material-symbols-outlined text-[18px]">flag</span>
+
+                      </button>
+
+                      <button
+
+                        onClick={() => setExpandedListing(null)}
+
+                        className="size-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/60 transition-colors"
+
+                        title="Collapse"
+
+                      >
+
+                        <span className="material-symbols-outlined text-[18px]">expand_less</span>
+
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                  <div className="flex flex-col md:flex-row gap-8">
+
+                    <div className="w-full md:w-1/3 space-y-3">
+
+                      <div className="aspect-[4/3] rounded-lg overflow-hidden border border-white/10 bg-black relative group cursor-pointer">
+
+                        <img
+
+                          alt="Listing Main"
+
+                          className="w-full h-full object-cover"
+
+                          src={pendingListings[0]?.images?.[0] || ''}
+
+                        />
+
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+
+                          <span className="material-symbols-outlined text-white">zoom_in</span>
+
+                        </div>
+
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-2">
+
+                        {pendingListings[0]?.images?.slice(1, 3).map((img, idx) => (
+
+                          <div
+
+                            key={idx}
+
+                            className="aspect-square rounded-md overflow-hidden border border-white/10 bg-black opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
+
+                          >
+
+                            <img alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" src={img} />
+
+                          </div>
+
+                        ))}
+
+                        <div className="aspect-square rounded-md overflow-hidden border border-white/10 bg-black flex items-center justify-center text-white/40 text-xs font-bold cursor-pointer hover:bg-white/5 transition-colors">
+
+                          +2
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div className="flex-1 space-y-6">
+
+                      <div>
+
+                        <div className="flex justify-between items-start">
+
+                          <h2 className="text-2xl font-bold text-white mb-2">{pendingListings[0].title}</h2>
+
+                          <div className="text-2xl font-display font-bold text-primary">{pendingListings[0].price}</div>
+
+                        </div>
+
+                        <div className="flex items-center gap-4 text-sm text-white/60 mb-4">
+
+                          <span className="flex items-center gap-1">
+
+                            <span className="material-symbols-outlined text-[16px]">category</span> {pendingListings[0].category}
+
+                          </span>
+
+                          <span className="w-1 h-1 rounded-full bg-white/20"></span>
+
+                          <span className="flex items-center gap-1">
+
+                            <span className="material-symbols-outlined text-[16px]">location_on</span> {pendingListings[0].location}
+
+                          </span>
+
+                          <span className="w-1 h-1 rounded-full bg-white/20"></span>
+
+                          <span className="text-white/40">ID: 8823910</span>
+
+                        </div>
+
+                        <p className="text-white/80 leading-relaxed text-sm bg-dark-surface p-4 rounded-lg border border-white/5">
+
+                          {pendingListings[0].description}
+
+                        </p>
+
+                      </div>
+
+                      <div className="bg-dark-elevated rounded-lg p-4 flex items-center justify-between border border-white/5">
+
+                        <div className="flex items-center gap-3">
+
+                          <div className="size-10 rounded-full bg-secondary flex items-center justify-center text-white font-bold">
+
+                            {pendingListings[0].seller.initial}
+
+                          </div>
+
+                          <div>
+
+                            <div className="text-sm font-bold text-white flex items-center gap-1">
+
+                              {pendingListings[0].seller.name}
+
+                              {pendingListings[0].seller.verified && (
+
+                                <span className="material-symbols-outlined text-blue-400 text-[14px]" title="Verified Seller">
+
+                                  verified
+
+                                </span>
+
+                              )}
+
+                            </div>
+
+                            <div className="text-xs text-white/40">
+
+                              Member since {pendingListings[0].seller.memberSince} • {pendingListings[0].seller.listings} Listings
+
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                        <div className="flex gap-4 text-xs text-white/60 text-right">
+
+                          <div>
+
+                            <div className="font-bold text-white">{pendingListings[0].seller.rating}</div>
+
+                            <div>Rating</div>
+
+                          </div>
+
+                          <div>
+
+                            <div className="font-bold text-green-400">{pendingListings[0].seller.strikes}</div>
+
+                            <div>Strikes</div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4 pt-2">
+
+                        <button className="glass-button-danger py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+
+                          <span className="material-symbols-outlined">close</span>
+
+                          Reject Ad
+
+                        </button>
+
+                        <button className="glass-button-success py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+
+                          <span className="material-symbols-outlined">check</span>
+
+                          Approve Ad
+
+                        </button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            )}
+
+
+
+            {/* Compact Listing Cards */}
+
+            {pendingListings.slice(1).map((listing, index) => (
+
+              <div
+
+                key={listing.id}
+
+                className="glass-panel rounded-xl p-4 flex items-center gap-4 hover:bg-white/5 transition-colors cursor-pointer group border border-white/5 hover:border-white/10"
+
+                onClick={() => setExpandedListing(listing.id)}
+
+              >
+
+                <div className={`size-16 rounded-lg bg-dark-surface overflow-hidden flex-shrink-0 relative ${listing.potentiallyUnsafe ? '' : ''}`}>
+
+                  <img
+
+                    alt={listing.title}
+
+                    className={`w-full h-full object-cover ${listing.potentiallyUnsafe ? 'grayscale opacity-50' : ''}`}
+
+                    src={listing.img}
+
+                  />
+
+                  {listing.potentiallyUnsafe && (
+
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+
+                      <span className="material-symbols-outlined text-white text-sm">warning</span>
+
+                    </div>
+
+                  )}
+
+                </div>
+
+                <div className="flex-1 min-w-0">
+
+                  <div className="flex justify-between items-center mb-1">
+
+                    <h3 className="font-bold text-white truncate pr-4 flex items-center gap-2">
+
+                      {listing.title}
+
+                      {listing.potentiallyUnsafe && (
+
+                        <span className="bg-red-500/20 text-red-400 text-[10px] px-1.5 py-0.5 rounded border border-red-500/20 font-medium">
+
+                          Potentially Unsafe
+
+                        </span>
+
+                      )}
+
+                    </h3>
+
+                    <span className="text-primary font-bold whitespace-nowrap">{listing.price}</span>
+
+                  </div>
+
+                  <div className="flex items-center gap-3 text-xs text-white/50">
+
+                    <span>{listing.category}</span>
+
+                    <span className="w-1 h-1 rounded-full bg-white/10"></span>
+
+                    <span>{listing.location}</span>
+
+                    <span className="w-1 h-1 rounded-full bg-white/10"></span>
+
+                    <span>Posted {listing.submittedTime}</span>
+
+                    <span className="w-1 h-1 rounded-full bg-white/10"></span>
+
+                    <span className="text-white/70">Seller: {listing.sellerName}</span>
+
+                  </div>
+
+                </div>
+
+                <div className="flex items-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+
+                  <button
+
+                    className="p-2 rounded-lg hover:bg-red-500/20 hover:text-red-400 transition-colors text-white/40"
+
+                    onClick={(e) => {
+
+                      e.stopPropagation();
+
+                      // Handle reject
+
+                    }}
+
+                  >
+
+                    <span className="material-symbols-outlined">close</span>
+
+                  </button>
+
+                  <button
+
+                    className="p-2 rounded-lg hover:bg-green-500/20 hover:text-green-400 transition-colors text-white/40"
+
+                    onClick={(e) => {
+
+                      e.stopPropagation();
+
+                      // Handle approve
+
+                    }}
+
+                  >
+
+                    <span className="material-symbols-outlined">check</span>
+
+                  </button>
+
+                  <button
+
+                    className="p-2 rounded-lg hover:bg-white/10 transition-colors text-white/40"
+
+                    onClick={(e) => {
+
+                      e.stopPropagation();
+
+                      setExpandedListing(listing.id);
+
+                    }}
+
+                  >
+
+                    <span className="material-symbols-outlined">expand_more</span>
+
+                  </button>
+
+                </div>
+
+              </div>
+
+            ))}
+
+            <div className="mt-8 flex justify-center">
+
+              <button className="text-sm text-white/40 hover:text-primary transition-colors flex items-center gap-2">
+
+                <span className="material-symbols-outlined animate-spin text-lg">sync</span>
+
+                Loading more listings...
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+
+  );
+
+}
+
+

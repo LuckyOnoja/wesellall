@@ -5,48 +5,10 @@ WeSellAll is a Nigerian marketplace platform (similar to Jiji, OLX) built with N
 
 ---
 
-## 1. Landing Page (`/` - `src/app/page.tsx`)
+
 
 ### Purpose
 The main homepage showcasing the platform's value proposition and key features.
-
-### Key Sections:
-1. **Hero Section**
-   - Full-screen hero with animated background mesh (floating gradient orbs)
-   - Large headline: "Buy & Sell Anything Securely in Nigeria"
-   - Glassmorphism search bar with location selector
-   - Trust indicators (Verified Sellers, Secure Escrow, Fast Selling)
-
-2. **Categories Grid**
-   - 8 category cards with images (Vehicles, Real Estate, Electronics, Fashion, Jobs, Services, Home & Garden, Pets)
-   - Each card shows icon, name, description on hover
-   - Links to category pages
-
-3. **Featured Listings Carousel**
-   - Horizontal scrolling carousel of featured products
-   - Each listing shows: image, price badge, location, title, description, time posted
-   - Examples: Toyota Camry, 3 Bedroom Flat, iPhone 15 Pro Max, Gaming Setup
-
-4. **How It Works Timeline**
-   - 3-step process: Snap a Photo → Add Details → Get Paid
-   - Numbered badges, icons, descriptions
-
-5. **Pricing Section**
-   - 3 pricing tiers: Basic (Free), Power Seller (₦5,000/mo), Business (₦20,000/mo)
-   - Feature comparison lists
-   - CTA buttons
-
-6. **Locations Map Section**
-   - Nigeria map visualization with hotspots (Lagos, Abuja, Port Harcourt)
-   - Stats: 36+ States, 2M+ Users, 500K+ Listings
-   - Hover interactions on map pins
-
-7. **Footer CTA**
-   - Large "Ready to Sell?" section with CTA button
-
-8. **Footer**
-   - 4-column layout: Company, Support, Legal, Follow Us
-   - Links and social icons
 
 ### Design Theme:
 - Dark theme with `#23140f` background

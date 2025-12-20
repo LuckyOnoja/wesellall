@@ -28,11 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark ${spaceGrotesk.variable} ${notoSans.variable}`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${notoSans.variable}`}>
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
-      <body className="min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden transition-colors duration-300">
+      <body className="min-h-screen bg-white text-slate-900 font-display overflow-x-hidden">
         <Providers>
           <LayoutShell>{children}</LayoutShell>
         </Providers>
