@@ -70,20 +70,8 @@ export default function Home() {
     <div className="bg-white text-slate-800 font-body overflow-x-hidden w-full max-w-full" style={{ color: '#1e293b' }}>
       {/* ================= HERO SECTION ================= */}
       <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center pt-20 sm:pt-24 pb-12 sm:pb-0 overflow-hidden bg-white">
-        {/* Background - Image on Mobile, Video on Desktop for better performance */}
+        {/* Background - Video on Desktop, Gradient on Mobile for better performance */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          {/* Image Background - Mobile (faster loading) */}
-          <div className="absolute inset-0 md:hidden">
-            <Image
-              src="/hero-bg.jpg"
-              alt="Nigerian marketplace background"
-              fill
-              className="object-cover"
-              priority
-              sizes="100vw"
-            />
-          </div>
-          
           {/* Video Background - Desktop (more engaging) */}
           <video
             autoPlay
@@ -95,7 +83,7 @@ export default function Home() {
             <source src="/hero.mp4" type="video/mp4" />
           </video>
           
-          {/* Fallback gradient if no image/video */}
+          {/* Fallback gradient background */}
           <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/5 via-white to-brand-orange/5"></div>
           
           {/* Overlay for better text readability - responsive opacity */}
