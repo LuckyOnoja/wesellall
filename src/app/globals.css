@@ -71,7 +71,6 @@ html {
   max-width: 100vw;
 }
 
-/* Ensure all text is visible by default - use dark color */
 html, body {
   color: #1e293b;
   overflow-x: hidden;
