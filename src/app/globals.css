@@ -53,13 +53,7 @@
   --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }
 
-/* Disable automatic dark mode - we want light theme by default */
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #01082a;
-    --foreground: #ffffff;
-  }
-} */
+
 
 body {
   background: #ffffff;
