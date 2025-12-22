@@ -3,9 +3,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --primary: #ff6933;
+  --primary: #004E89;
+  --accent: #ff6933;
   --secondary: #004E89;
-  --background-light: #f8f6f5;
+  --background-light: #ffffff;
   --background-dark: #23140f;
   --dark-surface: #2c1a14;
   --dark-lighter: #3a251e;
@@ -16,6 +17,9 @@
   --surface-dark: #1e293b;
   --border-light: #e2e8f0;
   --border-dark: #334155;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --card-bg: #ffffff;
 }
 
 @theme inline {
@@ -26,6 +30,7 @@
   --font-sans: var(--font-space-grotesk);
   --font-mono: var(--font-geist-mono);
   --color-primary: var(--primary);
+  --color-accent: var(--accent);
   --color-secondary: var(--secondary);
   --color-background-light: var(--background-light);
   --color-background-dark: var(--background-dark);
@@ -38,6 +43,9 @@
   --color-surface-dark: var(--surface-dark);
   --color-border-light: var(--border-light);
   --color-border-dark: var(--border-dark);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-card-bg: var(--card-bg);
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-2xl: 1rem;
@@ -55,9 +63,111 @@
 
 body {
   background: #ffffff;
-  color: #171717;
+  color: #1e293b;
   font-family: var(--font-space-grotesk), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+}
+
+html {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Ensure all text is visible by default - use dark color */
+html, body {
+  color: #1e293b;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Override any white text on white backgrounds - change to orange */
+.text-white {
+  color: #ffffff !important;
+}
+
+/* Ensure footer text stays white on dark backgrounds */
+footer .text-white,
+footer.text-white,
+.bg-gray-900 .text-white,
+.bg-black .text-white,
+.bg-gradient-to-b .text-white {
+  color: #ffffff !important;
+}
+
+/* Ensure text elements have proper default colors */
+p, h1, h2, h3, h4, h5, h6, span, div, a, button {
+  color: inherit;
+}
+
+/* Premium Responsive Enhancements */
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth scrolling for horizontal scroll sections */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Better line clamping for mobile */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Prevent text size adjustment on iOS */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Better focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #004E89;
+  outline-offset: 2px;
+}
+
+/* Smooth snap scrolling */
+.snap-x {
+  scroll-snap-type: x mandatory;
+}
+
+.snap-center {
+  scroll-snap-align: center;
+}
+
+.snap-mandatory {
+  scroll-snap-type: x mandatory;
+}
+
+/* Fix any white text that might be on white backgrounds - change to orange */
+.bg-white .text-white:not(footer .text-white),
+.bg-white.text-white:not(footer.text-white),
+.white-bg .text-white:not(footer .text-white) {
+  color: #ff6933 !important; /* Use brand orange instead */
 }
 
 html {
@@ -84,12 +194,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: var(--accent);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary);
+  background: var(--primary);
 }
 
 /* Smooth transitions */
@@ -97,43 +207,31 @@ html {
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Gradient text */
+/* Gradient text - updated for light theme */
 .text-gradient {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(to right, #ffffff, #ff6933);
+  background-image: linear-gradient(to right, var(--primary), var(--accent));
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glass effect */
-.glass {
-  background: rgba(35, 20, 15, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
+/* Glass effect - removed dark theme styles for light theme compatibility */
 
-/* Sidebar link active state */
+/* Sidebar link active state - updated for light theme */
 .sidebar-link.active {
-  background: rgba(255, 105, 51, 0.1);
-  color: #ff6933;
-  border-right: 3px solid #ff6933;
+  background: rgba(0, 78, 137, 0.1);
+  color: var(--primary);
+  border-right: 3px solid var(--primary);
 }
 
-/* Glass panel */
-.glass-panel {
-  background: rgba(44, 26, 20, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
+/* Glass panel - removed dark theme styles for light theme compatibility */
 
 /* Glass buttons */
 .glass-button-success {
@@ -205,21 +303,21 @@ html {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
-/* Neon glow effect */
+/* Neon glow effect - updated for light theme */
 .neon-glow {
-  box-shadow: 0 0 20px rgba(255, 107, 53, 0.3),
-              0 0 40px rgba(255, 107, 53, 0.2),
-              0 0 60px rgba(255, 107, 53, 0.1);
+  box-shadow: 0 0 20px rgba(0, 78, 137, 0.3),
+              0 0 40px rgba(0, 78, 137, 0.2),
+              0 0 60px rgba(0, 78, 137, 0.1);
 }
 
-/* Animated gradient background */
+/* Animated gradient background - updated for light theme */
 @keyframes gradient-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
 
 .animated-gradient {
-  background: linear-gradient(-45deg, #FF6B35, #004E89, #FF6B35, #004E89);
+  background: linear-gradient(-45deg, var(--primary), var(--accent), var(--primary), var(--accent));
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
 }
@@ -238,27 +336,28 @@ html {
   animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Hot gradient background */
+/* Hot gradient background - updated for light theme */
 .bg-hot-gradient {
-  background: linear-gradient(135deg, #ff6933 0%, #ff3333 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, #ff3333 100%);
 }
 
-/* Custom checkbox and radio styles */
+/* Custom checkbox and radio styles - updated for light theme */
 input[type="radio"]:checked,
 input[type="checkbox"]:checked {
-  background-color: #ff6933;
-  border-color: #ff6933;
+  background-color: #004E89;
+  border-color: #004E89;
 }
 
 input[type="radio"],
 input[type="checkbox"] {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background-color: white;
+  border-color: #cbd5e1;
 }
 
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  box-shadow: 0 0 0 2px rgba(255, 105, 51, 0.4);
+  box-shadow: 0 0 0 2px rgba(0, 78, 137, 0.2);
+  border-color: #004E89;
 }
 
 /* Custom range slider styles */
@@ -267,16 +366,16 @@ input[type=range]::-webkit-slider-thumb {
   height: 24px;
   width: 24px;
   border-radius: 50%;
-  background: #ff6933;
+  background: #004E89;
   cursor: pointer;
   margin-top: -10px;
-  box-shadow: 0 0 10px rgba(255, 105, 51, 0.5);
+  box-shadow: 0 0 10px rgba(0, 78, 137, 0.3);
 }
 
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 4px;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.1);
+  background: #e2e8f0;
   border-radius: 2px;
 }

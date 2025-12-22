@@ -56,9 +56,9 @@ export default function Navbar() {
                 href={item.href}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
                   pathname === item.href
-                    ? 'text-primary bg-primary/10'
-                    : 'text-gray-700 hover:text-primary hover:bg-gray-100'
-                } ${item.highlight ? 'bg-primary text-white hover:bg-primary/90' : ''}`}
+                    ? 'text-brand-blue bg-brand-blue/10 font-semibold'
+                    : 'text-gray-700 hover:text-brand-blue hover:bg-gray-100'
+                } ${item.highlight ? 'bg-brand-orange text-white hover:bg-brand-orange/90' : ''}`}
               >
                 {item.icon && <span>{item.icon}</span>}
                 <span>{item.label}</span>
@@ -78,15 +78,15 @@ export default function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center space-x-3">
-            <button className="p-2 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-full">
+            <button className="p-2 text-gray-600 hover:text-brand-blue hover:bg-gray-100 rounded-full">
               <Bell size={20} />
             </button>
-            <button className="p-2 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-full">
+            <button className="p-2 text-gray-600 hover:text-brand-blue hover:bg-gray-100 rounded-full">
               <ShoppingCart size={20} />
             </button>
             <div className="relative group">
               <button className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-full">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-br from-brand-blue to-brand-blue rounded-full flex items-center justify-center">
                   <User size={16} className="text-white" />
                 </div>
               </button>
@@ -129,9 +129,9 @@ export default function Navbar() {
                   href={item.href}
                   className={`flex items-center justify-between px-4 py-3 rounded-lg font-medium ${
                     pathname === item.href
-                      ? 'text-primary bg-primary/10'
+                      ? 'text-brand-blue bg-brand-blue/10 font-semibold'
                       : 'text-gray-700 hover:bg-gray-100'
-                  } ${item.highlight ? 'bg-primary text-white hover:bg-primary/90' : ''}`}
+                  } ${item.highlight ? 'bg-brand-orange text-white hover:bg-brand-orange/90' : ''}`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <div className="flex items-center space-x-3">
@@ -157,7 +157,7 @@ export default function Navbar() {
                 className="w-full flex items-center justify-center space-x-2 p-3 text-gray-600 hover:bg-gray-100 rounded-lg"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-br from-brand-blue to-brand-blue rounded-full flex items-center justify-center">
                   <User size={16} className="text-white" />
                 </div>
                 <span>Profile</span>

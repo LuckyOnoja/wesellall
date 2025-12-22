@@ -8,367 +8,459 @@ import { useState } from 'react';
 export default function Home() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
-  const [category, setCategory] = useState('All Categories');
   const [location, setLocation] = useState('All Nigeria');
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const params = new URLSearchParams();
     if (searchQuery) params.set('q', searchQuery);
-    if (category !== 'All Categories') params.set('category', category);
     if (location !== 'All Nigeria') params.set('location', location);
     router.push(`/products?${params.toString()}`);
   };
 
   const categories = [
-    { name: 'Fashion', icon: 'checkroom', count: '1,203 Ads' },
-    { name: 'Vehicles', icon: 'directions_car', count: '8,450 Ads' },
-    { name: 'Property', icon: 'home_work', count: '5,320 Ads' },
-    { name: 'Electronics', icon: 'smartphone', count: '12k Ads' },
-    { name: 'Jobs', icon: 'work', count: '450 Ads' },
-    { name: 'Pets', icon: 'pets', count: '200 Ads' },
+    { name: 'Vehicles', icon: 'directions_car', description: 'Cars, Buses, Trucks' },
+    { name: 'Real Estate', icon: 'real_estate_agent', description: 'Houses, Land, Apartments' },
+    { name: 'Electronics', icon: 'devices', description: 'Phones, Laptops, Audio' },
+    { name: 'Fashion', icon: 'checkroom', description: 'Clothing, Shoes, Bags' },
+    { name: 'Jobs', icon: 'work', description: 'Full-time, Part-time' },
+    { name: 'Services', icon: 'handyman', description: 'Cleaning, Repair, Movers' },
+    { name: 'Home & Garden', icon: 'chair', description: 'Furniture, Appliances' },
+    { name: 'Pets', icon: 'pets', description: 'Dogs, Cats, Accessories' },
   ];
 
-  const featuredPromos = [
-    {
-      title: 'Upgrade Tech',
-      subtitle: 'Latest smartphones at best prices.',
-      badge: 'NEW',
-      gradient: 'from-primary/90',
-      link: '/products?category=Electronics',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCqZgJZ_IejJMOTq5wPaI57lO9XkGyBCGhD13czEs--1z7Gj70flUUqjVpKRvluzEn3dAWtNG9xBAISmGCO5Ktd6GZD8kVR7Ywo5ifHzez6afaNVhDl4Lsxe9UlvP5pgNHIZmZsv35PwxGDDpsARzohsHqkA_WBw3UOGUoRa1TpXR5KvuUYUQZur3ZHCnCSpxRvL6UE0dyzYBoKBu6lHtAGP24dUbKIugu1pg-yFVHWYb3kuknd5zOMZQylW9pMCeMk8hkhbcfaPg',
-    },
-    {
-      title: 'Dream Homes',
-      subtitle: 'Apartments for rent in Lagos.',
-      badge: 'HOT',
-      gradient: 'from-slate-900/80',
-      link: '/products?category=Real Estate',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuADyzsT0Z8CP2xYycCnm6cPRVXHOMXoE4_zSTHJrHabxjUd33AgFTlwGAh5kf3KSHhB7ipEGL-5f9nVJm0zRs_WdLqZ9jkILOt5_o3F_46N1mbnAd9TB8BBnaseiOvjVNXC8zIeumxxqjau0xLmqobxJIu-MhIMvyQ6l5JdTK2hmMjwAXr-3NBx6RQ5YOHLAXtRN_wO-AwS1i4wqVKPEPB2Rd_p-UJKzzaSQTr62D8d6wmUqnXfCYoIUm2DbsnUDkYdTeGe_CzS0Q',
-    },
-    {
-      title: 'Fashion Week',
-      subtitle: 'Update your wardrobe today.',
-      badge: 'TRENDING',
-      gradient: 'from-secondary/90',
-      link: '/products?category=Fashion',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnFwGrXab0Hyhj5bxx_JsBYuc8fYkaMt5gbA1PEuAvBmmuRx31-6f3UG5ydQ8wrIFj_WVWrvZuZxMEQ2f7dvrLDuEuqB21ZbZr5s3wCG8T8fLyFZ7DPitcxU7GiprB_f-Ck74_ad1HUWRJ9rgymP2Sm1WzhbTTwidLbJHoKH14-ccOBtnOzTYrl7oHzIwG4aGA0_9BltPUxQW2Mn2T8fL4KyJz9CZXL6uxU7rijyT9p_iG45hVSZVLAvSUxzxm9Po0QS2hBh-l-A',
-    },
-  ];
 
-  const premiumListings = [
+  const featuredListings = [
     {
-      title: 'Toyota Camry 2021 Clean',
-      price: '₦ 8,500,000',
-      category: 'Vehicles',
+      title: 'Toyota Camry 2021',
+      price: '₦ 8.5M',
       location: 'Lagos',
-      time: '2 hrs ago',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBkRC1-AH3FfUWOSZ5Mpekpxbi0b8u-gsD2syI6Hr3TOqSRal2kM6jplGRbFzFjzKv7-cK6Eioo9XTodgn8OwEOeKPZU0Lpe-93lYBn4g7bzVJBLzCewz7azaxuRfxt-AsBIHxTtnhiTr7N0AzsW4k5P7_41RuS3LxcaAL8SQY9NAWK5Z8SxSBAhsa8H4SePXyNyoFrm5OrrulzzSBx7tgle90fGg8UmKwPFFfVnr7uAPjeIiQA02dE7quMMKVaeXk-4pfQ66gmrg',
-      premium: true,
+      time: 'Posted 2h ago',
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYkajuIqCGYfuwfVXGXWRDvDBnLBTKDdnft5BzopWA2klnazlXnQymparvK6PKYFzOkyta8W7tO2ixfsYprpgeREruncGKCNBNfFHUitje723GRoS56gTUN1gIADAboCFEm_ThSZSKJDihIu7CStUFjyqZpkfQaSN3o4fUnEO_iXI8hLChrlEsspxYoLYRI2nHGNpPdIx_i_3gpy0M8sg8tgx1LdbiveCjpz9hBryWokg1f8ebdRIzUp24GqdrfD9UkAYW_8bAEQ',
+      description: 'Clean title, foreign used, low mileage. Perfect condition...',
     },
     {
-      title: 'iPhone 13 Pro Max 256GB',
-      price: '₦ 650,000',
-      category: 'Mobiles',
+      title: '3 Bedroom Flat',
+      price: '₦ 45M',
+      location: 'Lekki, Lagos',
+      time: 'Posted 5h ago',
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCzlzcQJhWyo3p39-FtBiIoyqcBg3zewCxqZA465TJkwOw18DWhoKdZAsryRWFEB1n1X23z9sN09GzDk5tl7FOkvTfPwDWV4PsYLiDiApCrZqEMwDwrCYOuIGGIs_oK2Djj8jPsvcEVtxOIPVTWGclsx7nt4IfTYBKu97NzFSD7NoUC0bJmNl8EH1nlVBJbo7tuhfWja6SmnL4AWewjBREh1sfjWelVnxbfbQWOVUkwr5IfWByRCro59RMNs3RLs__mislQDO4-Uw',
+      description: 'Serviced apartment with swimming pool and gym...',
+    },
+    {
+      title: 'iPhone 15 Pro Max',
+      price: '₦ 1.2M',
       location: 'Abuja',
-      time: '5 hrs ago',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCiZIo_i7YongNLsHoSG-lA_6TvHb8NTtWem_1UpsT-WlZZ8Y6sWUUqnorTV24LUYEs50tLR8B--qrD3Db8kEjokEXPcmFr3-IZ78whG_Ox6QbYiIjkJR-CWnZbHoxt53vFSM7jVRZv5fE27k_XD2bU-72yqE2NHGNCsNJ2C3dIHEsWoRWly3q6F6pm5vECeTg6TvaAi3HrNM2CjTkbex_xuPa5jRiFUXjoV8-TXxSrOmW-Gg6pRsoSulaZ0ICZ3dhspl8G2EbyNg',
-      premium: false,
+      time: 'Posted 1d ago',
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCFBsx2ugUFtLxtNHa7xTDv-C5pA4EX2xgAQw_4S20a96i4M4YExJzYRP0L_GDQReFfcpk4egVXVqm2-NrpWcvrUv6kdmR9za2OYTMk16odQjBtc1Cqv-4gin3QKel6Q8WAe9EVrKKHrsFL8n_hmnUa_i0ODPToPYjo_dpQOOeqbKN-qIYy40pcwuegzoRWqIJEAJwcpN97jtb6wZpMVvG58oIkOoyMwlrBQSdvV6SxKq-LmRVb1-zUHLSn3itiHInPSoVE21xnMg',
+      description: 'Brand new, sealed. 256GB, Natural Titanium...',
     },
     {
-      title: '2 Bedroom Flat Serviced',
-      price: '₦ 2,500,000/yr',
-      category: 'Real Estate',
-      location: 'Lekki',
-      time: '1 day ago',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDnMWY_avjgNS8awyPlTDFC7QxyZGa_cZKIMRiV29vdYGScK-WeD5bbFMYiYd9tcYU-lJY6nJxwFvzOLfCBOn7RQ083j-4HSXE6bJdjnNqZ2JK8fUkax6yKBIKFDq-Ms5SCn0dna4cR84nIwCQtgVTFaQmB4uPT5O8ODMYj2wUrE6sVLYycyQmy2vZvaYvTx9c5npbeSDvNIIw1OmiebokZmA3-WFX9Hici9b2m58gWDxg--4VxhXL26av6NBkUzcwsWojrvuxhfg',
-      premium: true,
-    },
-    {
-      title: 'Sony Noise Cancelling',
-      price: '₦ 45,000',
-      category: 'Electronics',
-      location: 'Ikeja',
-      time: '3 hrs ago',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCgHAKyDJ1r0hJoeIJPM5QdT8D57SKp91ux0uwV4Y-pOf-CsMjMcpDPq6BPOBcJOTyUfjCacceZAMKE2V276Vb6QWF_lJbaLPRE45kRzDwu_EkCAdRBDMumqS9eCjYYQfXTtEQOZxMkqgbul0zGDb5shPvCAyomHO5kaU1W9MKhM63gO0t3VE2Sps_U8C9ZehMh9H2ZDiHwpKgh72B-kBbD4QaDDxJEuMaTnGSD8Pq2qRz3EdrZdBC4hOWVzEPm6NOtGDvrTcc3Mw',
-      premium: false,
+      title: 'Gaming Setup',
+      price: '₦ 450K',
+      location: 'Port Harcourt',
+      time: 'Posted 3d ago',
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDpc5c0MSfuZs1mUIw7TYK9ypMWhPXAAUhDs8b-5a6JPmJKvYllCjnpQsDziHLDX5NGSWsS-ZS021uK4F0sUgVzQR86jrEudGEHKcIi3miwtF1K-QymYgu23_o9vE5ek-RGh-4e-nCVf0Xtw409NFtugy7B8A5dTkh_SoHa9gDNp-VeH7JPjj0BCKZHRvnUOKmJdv7u3BWgTCVs7S75Oci_bC8xCIDsPAspc08Kck2xpb_5I6hft926ylguRoUs5xMOqF3OOmsFKA',
+      description: 'Complete setup with monitor, keyboard and mouse...',
     },
   ];
 
-  const recentListings = [
-    {
-      title: 'Cute Golden Retriever',
-      price: '₦ 120,000',
-      category: 'Pets',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBlRmsgcG84omRCSfmTcI8FeSlpEqSqzOTAbb2o88sPbxPwkaEGJfT56XwbKNwhyyRzQSnnOEi_T534yyztvM6WczUQsr6HbL2ztOnZoICIPkgroLnB4HeHIa0s_gPaO_WBV2ss6PSEYw2UANTuETBWF_IpmFmAMShnNDeWkqlyIwgkoAWJVaREp38Rb_FAv0H9gbtXWO6q2Nl1xBlCx-1W_6zmKk3oPhIpO6QZbbMq7PYYa52c9nsd--Yi4diafnb-MUBhpUtlww',
-    },
-    {
-      title: 'Nike Air Max Red',
-      price: '₦ 35,000',
-      category: 'Fashion',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCDFwktxEKQSIp9vyudnxlU_--ZXI7H0H-mh5H8hFytImskqszbE7ZsVpJHa-iWaMRTzhQ1Ww9UV7nsraD_mP5oH1AnhEtr2Ct2vs6Py88J5v2CpM5AQWpbiGNKMsk94Esbh5V5Waw8d2Hf1gnmnhC-7DSuz4pdgH2kj0YjJIlQoVS_WfoZDx8YR82tl_dftJqDAkV3SNPxEjnz3LjIzMqckSftdIrUUdZuiBWRn7s_2cLdM1ba3Z8n3mxCWUwXll6tln4yDW50wQ',
-    },
-    {
-      title: 'MacBook Pro M1 Used',
-      price: '₦ 850,000',
-      category: 'Computer',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCeHwNlvmsCXli_AQW2KI0Ez7jh4Ley1ar-w7DShWPGKR5Mrfde6UdajWE31_rPUb-hXKlTGkdfcK0SiFGP33ZuZOk-vVGadKhapj5_XCbcjEr7lQ8dVAfedXaoBz_geHlFG2D_oMl_MX037D8AgDDYT13kKBggknALndhNfwydUkHbOBr9WYuIb3yYIn5PcpGUiArOZ0GW8DIZKbrxDfYWbl4Yk8ixzFPUsuCXhQJjESI0jAF4EqXRTdGNSoLea1WvCiUhSOTGkg',
-    },
-    {
-      title: 'Modern Sofa Set',
-      price: '₦ 150,000',
-      category: 'Home & Garden',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDny9ilLxrtaPAQCkRbVBn7EICCPmj8Lmjbtzm3xKIRM9njx1jFAUok8JdOKB0It-hj8_AB-VO3Hd-Mk6fkBRxoc8wDk-HUqsKLWIMYzTC7oXTm-JQBzgxgX6UHknrVaToi22_B5Df-z4Dxzpw3HyXIxZkzktCqXwRhHnyM3VfZTCznffr8tiAjYTS1a7KEEM-bHvvHFtJYCkXcmOs81jbydFhHcXRGOlTZikesQ5HQJ6Bl94EP3pItRcDql85SdSl34fDsABu63g',
-    },
-  ];
 
   return (
-    <div className="bg-background-light text-slate-800">
+    <div className="bg-white text-slate-800 font-body overflow-x-hidden w-full max-w-full" style={{ color: '#1e293b' }}>
       {/* ================= HERO SECTION ================= */}
-      <div className="relative bg-surface-light overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-10">
-          <svg className="h-full w-full text-primary" fill="currentColor" preserveAspectRatio="none" viewBox="0 0 100 100">
-            <path d="M0 100 C 20 0 50 0 100 100 Z"></path>
-          </svg>
+      <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center pt-20 sm:pt-24 pb-12 sm:pb-0 overflow-hidden bg-white">
+        {/* Background - Image on Mobile, Video on Desktop for better performance */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {/* Image Background - Mobile (faster loading) */}
+          <div className="absolute inset-0 md:hidden">
+            <Image
+              src="/hero-bg.jpg"
+              alt="Nigerian marketplace background"
+              fill
+              className="object-cover"
+              priority
+              sizes="100vw"
+            />
+          </div>
+          
+          {/* Video Background - Desktop (more engaging) */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="hidden md:block absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/hero.mp4" type="video/mp4" />
+          </video>
+          
+          {/* Fallback gradient if no image/video */}
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/5 via-white to-brand-orange/5"></div>
+          
+          {/* Overlay for better text readability - responsive opacity */}
+          <div className="absolute inset-0 bg-white/70 sm:bg-white/60 backdrop-blur-[2px]"></div>
+          
+          {/* Gradient blur effects on top */}
+          <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] rounded-full bg-brand-blue/5 blur-[80px]"></div>
+          <div className="absolute bottom-[10%] left-[-5%] w-[30%] h-[30%] rounded-full bg-brand-orange/5 blur-[60px]"></div>
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 flex flex-col items-center text-center">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-primary tracking-tight mb-4">
-            Post Free - Sell Fast - <span className="text-secondary">Cash Out Instantly</span>
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center gap-6 sm:gap-8 max-w-5xl">
+          <div className="space-y-4 sm:space-y-6 w-full">
+            <span className="inline-block py-1.5 px-3 sm:px-4 rounded-full bg-brand-blue/10 text-brand-blue text-[10px] sm:text-xs font-bold tracking-wide uppercase">
+              🇳🇬 Nigeria's #1 Marketplace
+            </span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.1] tracking-tight text-brand-blue font-display px-2">
+              Buy & Sell Anything <br className="hidden sm:block"/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-blue/70">Securely in Nigeria.</span>
             </h1>
-          <p className="mt-4 text-lg text-slate-600 max-w-2xl mb-10">
-            Join thousands of Nigerians buying and selling everyday. The safest marketplace for everything from phones to property.
-          </p>
-          <form onSubmit={handleSearch} className="w-full max-w-5xl bg-white p-3 rounded-2xl shadow-xl flex flex-col md:flex-row gap-2">
-            <div className="grow flex items-center px-4 py-2 bg-slate-50 rounded-xl">
-              <span className="material-symbols-outlined text-slate-400 mr-3">search</span>
+            <p className="text-base sm:text-lg md:text-xl text-slate-500 max-w-2xl mx-auto font-body px-4">
+              From Lagos to Abuja, connect with millions of buyers and sellers. Trusted by over 2 million Nigerians.
+            </p>
+          </div>
+          <div className="w-full max-w-3xl mt-4 sm:mt-6 px-2 sm:px-0">
+            <form onSubmit={handleSearch} className="bg-white p-1.5 sm:p-2 rounded-xl sm:rounded-2xl border-2 border-brand-blue/10 shadow-xl shadow-brand-blue/5 hover:border-brand-blue/30 transition-colors">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                <div className="flex-1 flex items-center h-12 sm:h-14 w-full px-3 sm:px-4 rounded-lg sm:rounded-xl bg-slate-50 focus-within:bg-white focus-within:ring-2 focus-within:ring-brand-blue/20 transition-all">
+                  <span className="material-symbols-outlined text-brand-blue mr-2 sm:mr-3 text-lg sm:text-xl">search</span>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-transparent border-none outline-none focus:ring-0 focus:outline-none text-slate-700 placeholder-slate-400 text-sm md:text-base h-full"
-                placeholder="What are you looking for?"
+                    className="bg-transparent border-none outline-none text-slate-900 placeholder-slate-400 w-full h-full focus:ring-0 text-base sm:text-lg"
+                    placeholder="Search for cars, phones..."
               />
           </div>
-            <div className="md:w-1/4 flex items-center px-4 py-2 bg-slate-50 rounded-xl border-l-0 md:border-l border-slate-200">
-              <span className="material-symbols-outlined text-slate-400 mr-3">category</span>
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="w-full bg-transparent border-none outline-none focus:ring-0 focus:outline-none text-slate-700 text-sm md:text-base cursor-pointer"
-              >
-                <option>All Categories</option>
-                <option>Vehicles</option>
-                <option>Real Estate</option>
-                <option>Electronics</option>
-                <option>Fashion</option>
-              </select>
-              </div>
-            <div className="md:w-1/4 flex items-center px-4 py-2 bg-slate-50 rounded-xl border-l-0 md:border-l border-slate-200">
-              <span className="material-symbols-outlined text-slate-400 mr-3">location_on</span>
+                <div className="h-px sm:h-8 w-full sm:w-px bg-slate-200 sm:bg-slate-200 hidden sm:block"></div>
+                <div className="flex items-center h-12 sm:h-14 w-full sm:w-auto px-3 sm:px-4 rounded-lg sm:rounded-xl bg-white text-slate-600 text-xs sm:text-sm font-medium cursor-pointer hover:bg-slate-50 transition-colors whitespace-nowrap">
+                  <span className="material-symbols-outlined text-brand-orange text-base sm:text-lg mr-2">location_on</span>
               <select
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full bg-transparent border-none outline-none focus:ring-0 focus:outline-none text-slate-700 text-sm md:text-base cursor-pointer"
+                    className="bg-transparent border-none outline-none cursor-pointer text-slate-600 text-xs sm:text-sm w-full sm:w-auto"
               >
                 <option>All Nigeria</option>
                 <option>Lagos</option>
                 <option>Abuja</option>
                 <option>Port Harcourt</option>
               </select>
+                  <span className="material-symbols-outlined text-base sm:text-lg ml-2 text-slate-400">expand_more</span>
               </div>
             <button
               type="submit"
-              className="bg-primary hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-xl shadow-md transition duration-200 flex items-center justify-center gap-2 outline-none focus:outline-none"
+                  className="w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 bg-brand-blue hover:bg-brand-blue/90 text-white font-bold rounded-lg sm:rounded-xl shadow-lg shadow-brand-blue/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 text-base sm:text-lg touch-manipulation"
             >
-              SEARCH
+                  Search
               </button>
+              </div>
           </form>
           </div>
+          <div className="mt-4 sm:mt-6 flex items-center justify-center gap-1.5 sm:gap-2 text-brand-blue font-bold tracking-wide text-[10px] sm:text-xs md:text-sm lg:text-base uppercase px-4">
+            <span className="material-symbols-outlined text-brand-orange text-sm sm:text-base">bolt</span>
+            <span className="whitespace-nowrap">Post Free - Sell Fast - Cash Out Instantly</span>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-12 text-slate-400 px-4">
+            <div className="text-xs sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2">
+              <span className="material-symbols-outlined text-brand-blue text-base sm:text-lg">verified_user</span> 
+              <span className="whitespace-nowrap">Verified Sellers</span>
+            </div>
+            <div className="text-xs sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2">
+              <span className="material-symbols-outlined text-brand-blue text-base sm:text-lg">payments</span> 
+              <span className="whitespace-nowrap">Secure Escrow</span>
+            </div>
+            <div className="text-xs sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2">
+              <span className="material-symbols-outlined text-brand-blue text-base sm:text-lg">rocket_launch</span> 
+              <span className="whitespace-nowrap">Fast Selling</span>
+            </div>
+          </div>
         </div>
+      </section>
 
       {/* ================= CATEGORIES SECTION ================= */}
-      <div className="bg-background-light py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-secondary font-semibold uppercase tracking-wider text-sm">Browse by Category</span>
-            <h2 className="text-3xl font-bold text-slate-900 mt-2">Marketplace for Nigeria by Nigeria</h2>
-            <div className="w-16 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+      <section className="py-12 sm:py-16 md:py-20 bg-brand-light" id="categories">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 sm:mb-8 md:mb-10 border-b border-slate-200 pb-3 sm:pb-4 gap-3 sm:gap-0">
+            <div className="flex-1">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-blue mb-1 sm:mb-2 font-display">Marketplace for Nigeria by Nigeria</h2>
+              <p className="text-sm sm:text-base text-slate-500">Find exactly what you are looking for</p>
             </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            <Link href="/categories" className="text-brand-blue hover:text-brand-orange transition-colors flex items-center gap-1 text-xs sm:text-sm font-bold whitespace-nowrap touch-manipulation">
+              View All <span className="material-symbols-outlined text-xs sm:text-sm">arrow_forward</span>
+            </Link>
+            </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
             {categories.map((cat) => (
               <Link
                 key={cat.name}
                 href={`/categories?cat=${encodeURIComponent(cat.name.toLowerCase())}`}
-                className="group flex flex-col items-center p-6 bg-white rounded-xl shadow-sm border border-slate-100 hover:border-primary hover:shadow-md transition duration-300"
+                className="group bg-white rounded-lg sm:rounded-xl shadow-sm hover:shadow-xl border border-slate-100 hover:border-brand-blue/30 transition-all duration-300 p-3 sm:p-4 flex flex-col items-center text-center gap-2 sm:gap-4 touch-manipulation active:scale-95"
               >
-                <div className="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                  <span className={`material-symbols-outlined text-primary group-hover:text-white text-2xl`}>{cat.icon}</span>
+                <div className="size-12 sm:size-14 md:size-16 rounded-full bg-brand-blue/5 flex items-center justify-center group-hover:bg-brand-blue/10 transition-colors">
+                  <span className="material-symbols-outlined text-brand-blue text-2xl sm:text-2xl md:text-3xl">{cat.icon}</span>
                 </div>
-                <span className="text-slate-700 font-medium group-hover:text-primary transition-colors">{cat.name}</span>
-                <span className="text-xs text-slate-400 mt-1">{cat.count}</span>
+                <div className="space-y-0.5 sm:space-y-1 w-full">
+                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-slate-800 group-hover:text-brand-blue transition-colors line-clamp-1">{cat.name}</h3>
+                  <p className="text-[10px] sm:text-xs text-slate-500 line-clamp-2">{cat.description}</p>
+                </div>
               </Link>
             ))}
           </div>
-          <div className="text-center mt-10">
-            <Link href="/categories" className="text-primary font-semibold hover:underline flex items-center justify-center w-full gap-1">
-              View All Categories <span className="material-symbols-outlined text-sm">arrow_forward</span>
-            </Link>
-                  </div>
-                </div>
-              </div>
+        </div>
+      </section>
 
       {/* ================= FEATURED PROMOTIONS ================= */}
-      <div className="bg-surface-light py-12 border-y border-border-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featuredPromos.map((promo, idx) => (
-              <Link
-                key={idx}
-                href={promo.link}
-                className="relative overflow-hidden rounded-xl h-48 group"
-              >
-                <Image
-                  alt={promo.title}
-                  src={promo.image}
-                  fill
-                  className="object-cover transform group-hover:scale-105 transition duration-500"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-                <div className={`absolute inset-0 bg-gradient-to-r ${promo.gradient} to-transparent flex flex-col justify-center px-6`}>
-                  <span className={`bg-${promo.badge === 'NEW' ? 'secondary' : promo.badge === 'HOT' ? 'white' : 'primary'} ${promo.badge === 'HOT' ? 'text-slate-900' : 'text-white'} text-xs font-bold px-2 py-1 rounded w-fit mb-2`}>
-                    {promo.badge}
-                  </span>
-                  <h3 className="text-white text-2xl font-bold mb-1">{promo.title}</h3>
-                  <p className={`${promo.badge === 'NEW' ? 'text-blue-100' : promo.badge === 'HOT' ? 'text-slate-200' : 'text-orange-100'} text-sm mb-4`}>
-                    {promo.subtitle}
-                  </p>
-                  <span className="text-white font-semibold underline decoration-secondary decoration-2 underline-offset-4 hover:text-secondary transition">
-                    {promo.badge === 'NEW' ? 'Shop Now' : promo.badge === 'HOT' ? 'Browse' : 'Explore'}
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
+      <section className="py-8 sm:py-12 bg-white border-y border-slate-100">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="rounded-lg sm:rounded-xl bg-brand-light border border-slate-200 p-6 sm:p-8 flex flex-col items-start justify-center min-h-[140px] sm:min-h-[160px] relative overflow-hidden group hover:border-brand-blue/30 transition-colors touch-manipulation active:scale-[0.98]">
+              <div className="absolute right-0 bottom-0 opacity-10 text-7xl sm:text-9xl text-brand-blue font-black -mr-2 sm:-mr-4 -mb-2 sm:-mb-4 rotate-12">Ad</div>
+              <span className="text-brand-orange text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-2">Sponsored</span>
+              <h3 className="text-lg sm:text-xl font-bold text-brand-blue mb-1">Targeted Ads</h3>
+              <p className="text-xs sm:text-sm text-slate-500 mb-3 sm:mb-4">Reach customers in Lagos</p>
+              <Link href="#" className="text-brand-blue font-semibold text-xs sm:text-sm hover:underline touch-manipulation">Learn More</Link>
+            </div>
+            <div className="rounded-lg sm:rounded-xl bg-brand-blue/5 border border-brand-blue/10 p-6 sm:p-8 flex flex-col items-start justify-center min-h-[140px] sm:min-h-[160px] relative overflow-hidden group touch-manipulation active:scale-[0.98]">
+              <div className="absolute right-3 sm:right-4 top-3 sm:top-4 size-10 sm:size-12 rounded-full bg-brand-blue/10 flex items-center justify-center">
+                <span className="material-symbols-outlined text-brand-blue text-lg sm:text-xl">trending_up</span>
+              </div>
+              <span className="text-brand-blue text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-2">Boost Sales</span>
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1">Promote Your Biz</h3>
+              <p className="text-xs sm:text-sm text-slate-500 mb-3 sm:mb-4">Get 5x more views today</p>
+              <button className="bg-brand-blue text-white text-[10px] sm:text-xs font-bold py-1.5 sm:py-2 px-3 sm:px-4 rounded hover:bg-brand-blue/90 touch-manipulation">Start Now</button>
       </div>
-
-      {/* ================= PREMIUM & TRENDING ADS ================= */}
-      <div className="bg-background-light py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
-            <div>
-              <h2 className="text-2xl font-bold text-slate-900">Premium & Trending Ads</h2>
-              <p className="text-slate-500 mt-1">The most viewed listings in the last 24 hours.</p>
+            <div className="rounded-lg sm:rounded-xl bg-brand-light border border-slate-200 p-6 sm:p-8 flex flex-col items-start justify-center min-h-[140px] sm:min-h-[160px] relative overflow-hidden group hover:border-brand-orange/30 transition-colors touch-manipulation active:scale-[0.98] sm:col-span-2 lg:col-span-1">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-brand-orange/5"></div>
+              <span className="text-brand-orange text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-2">Limited Time</span>
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1">Premium Features</h3>
+              <p className="text-xs sm:text-sm text-slate-500 mb-3 sm:mb-4">50% off for new sellers</p>
+              <Link href="#" className="text-brand-orange font-semibold text-xs sm:text-sm hover:underline flex items-center gap-1 touch-manipulation">
+                Claim Offer <span className="material-symbols-outlined text-xs sm:text-sm">arrow_forward</span>
+              </Link>
         </div>
-            <div className="flex gap-2">
-              <button className="px-4 py-2 text-sm font-medium rounded-lg bg-primary text-white shadow-md">All</button>
-              <button className="px-4 py-2 text-sm font-medium rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">
-                Cars
-              </button>
-              <button className="px-4 py-2 text-sm font-medium rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">
-                Phones
-              </button>
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {premiumListings.map((listing, idx) => (
-              <Link
+      </section>
+
+      {/* ================= FEATURED LISTINGS ================= */}
+      <section className="py-12 sm:py-16 md:py-20 bg-brand-light" id="featured">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 flex items-center gap-2 sm:gap-3 text-brand-blue">
+            <span className="material-symbols-outlined text-brand-orange text-2xl sm:text-3xl">local_fire_department</span>
+            <span>Featured Listings</span>
+          </h2>
+          <div className="flex overflow-x-auto gap-4 sm:gap-6 pb-4 sm:pb-8 scrollbar-hide snap-x snap-mandatory -mx-4 sm:-mx-0 px-4 sm:px-0 w-full max-w-full">
+            {featuredListings.map((listing, idx) => (
+              <div
                 key={idx}
-                href="/products"
-                className="group bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col"
+                className="min-w-[260px] sm:min-w-[280px] md:min-w-[320px] snap-center bg-white border border-slate-200 rounded-lg sm:rounded-xl overflow-hidden group hover:shadow-xl hover:shadow-brand-blue/10 transition-all duration-300 touch-manipulation active:scale-[0.98]"
               >
-                <div className="relative h-48 overflow-hidden">
-                  {listing.premium && (
-                    <span className="absolute top-3 left-3 bg-secondary text-white text-xs font-bold px-2 py-1 rounded z-10">
-                      PREMIUM
-                    </span>
-                  )}
-                  <span className="absolute top-3 right-3 bg-black/50 text-white p-1 rounded-full z-10 cursor-pointer hover:bg-red-500 transition">
-                    <span className="material-symbols-outlined text-sm">favorite</span>
-                  </span>
+                <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     alt={listing.title}
                     src={listing.image}
                     fill
-                    className="object-cover transform group-hover:scale-110 transition duration-500"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 260px, (max-width: 768px) 280px, 320px"
                   />
+                  <div className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-brand-orange text-white text-xs sm:text-sm font-bold px-2 sm:px-3 py-1 rounded-full shadow-md">
+                    {listing.price}
+                  </div>
+                  <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 bg-white/90 backdrop-blur-sm text-slate-800 text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded flex items-center gap-1 font-semibold">
+                    <span className="material-symbols-outlined text-brand-blue text-xs sm:text-sm">location_on</span> 
+                    <span className="whitespace-nowrap">{listing.location}</span>
         </div>
-                <div className="p-4 flex flex-col grow">
-                  <div className="text-xs text-slate-400 mb-1">
-                    {listing.category} • {listing.location}
           </div>
-                  <h3 className="text-lg font-bold text-slate-800 mb-2 line-clamp-1">{listing.title}</h3>
-                  <div className="mt-auto">
-                    <p className="text-xl font-bold text-primary">{listing.price}</p>
-                    <div className="flex justify-between items-center mt-3 pt-3 border-t border-slate-100">
-                      <span className="text-xs text-slate-500 flex items-center gap-1">
-                        <span className="material-symbols-outlined text-sm">schedule</span> {listing.time}
-                      </span>
-                      <span className="text-primary text-sm font-medium hover:text-secondary transition">View Details</span>
+                <div className="p-3 sm:p-4">
+                  <h3 className="text-base sm:text-lg font-bold mb-1 text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-1">{listing.title}</h3>
+                  <p className="text-xs sm:text-sm text-slate-500 mb-2 sm:mb-3 line-clamp-2">{listing.description}</p>
+                  <div className="flex justify-between items-center border-t border-slate-100 pt-2 sm:pt-3">
+                    <span className="text-[10px] sm:text-xs text-slate-400">{listing.time}</span>
+                    <button className="text-brand-blue hover:text-brand-orange text-xs sm:text-sm font-bold transition-colors touch-manipulation">View Details</button>
             </div>
           </div>
         </div>
-              </Link>
             ))}
               </div>
-          <div className="text-center mt-12">
-            <Link
-              href="/products"
-              className="bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3 px-8 rounded-full transition duration-300 inline-block"
-            >
-              Load More Listings
-            </Link>
-              </div>
-            </div>
-          </div>
+        </div>
+      </section>
 
-      {/* ================= RECENTLY POSTED ================= */}
-      <div className="bg-surface-light py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-secondary pl-4">Recently Posted</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {recentListings.map((listing, idx) => (
-              <Link
-                key={idx}
-                href="/products"
-                className="flex bg-white p-3 rounded-lg border border-slate-200 hover:shadow-md transition"
-              >
-                <div className="relative w-24 h-24 rounded-md overflow-hidden shrink-0">
-                  <Image
-                    alt={listing.title}
-                    src={listing.image}
-                    fill
-                    className="object-cover"
-                    sizes="96px"
-                  />
+      {/* ================= HOW IT WORKS ================= */}
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white relative overflow-hidden" id="how-it-works">
+        <div className="absolute inset-0 hidden md:flex justify-center items-center opacity-5 pointer-events-none">
+          <svg className="w-full h-full text-brand-blue" preserveAspectRatio="none" viewBox="0 0 100 20">
+            <path d="M0 10 Q 25 20, 50 10 T 100 10" fill="none" stroke="currentColor" strokeDasharray="2,2" strokeWidth="0.5"></path>
+          </svg>
+        </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-full">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-3 sm:mb-4 text-brand-blue font-display px-2">Start Selling in Minutes</h2>
+            <p className="text-sm sm:text-base text-slate-500 max-w-xl mx-auto px-4">Our streamlined process makes it easy to turn your items into cash.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 relative max-w-full">
+            <div className="flex flex-col items-center text-center group w-full">
+              <div className="size-20 sm:size-24 rounded-xl sm:rounded-2xl bg-white border-2 border-slate-100 flex items-center justify-center mb-4 sm:mb-6 shadow-xl group-hover:border-brand-blue/50 group-hover:shadow-brand-blue/10 transition-all duration-500 relative touch-manipulation mx-auto">
+                <span className="absolute -top-2 sm:-top-3 -right-2 sm:-right-3 size-7 sm:size-8 bg-brand-blue rounded-full flex items-center justify-center text-white text-xs sm:text-sm font-bold border-[3px] sm:border-4 border-white z-10">1</span>
+                <span className="material-symbols-outlined text-3xl sm:text-4xl text-brand-blue/60 group-hover:text-brand-blue transition-colors">photo_camera</span>
               </div>
-                <div className="ml-4 flex flex-col justify-center">
-                  <h4 className="text-sm font-semibold text-slate-800 line-clamp-1">{listing.title}</h4>
-                  <span className="text-xs text-slate-500 mb-1">{listing.category}</span>
-                  <span className="text-primary font-bold text-sm">{listing.price}</span>
+              <h3 className="text-lg sm:text-xl font-bold mb-2 text-slate-800">Snap a Photo</h3>
+              <p className="text-xs sm:text-sm text-slate-500 px-2 sm:px-4 max-w-full">Take clear photos of your item. Good lighting helps it sell faster.</p>
             </div>
-              </Link>
-            ))}
+            <div className="flex flex-col items-center text-center group relative w-full">
+              <div className="hidden sm:block absolute top-10 sm:top-12 left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-transparent via-brand-blue/20 to-transparent"></div>
+              <div className="size-20 sm:size-24 rounded-xl sm:rounded-2xl bg-white border-2 border-slate-100 flex items-center justify-center mb-4 sm:mb-6 shadow-xl group-hover:border-brand-blue/50 group-hover:shadow-brand-blue/10 transition-all duration-500 relative touch-manipulation mx-auto">
+                <span className="absolute -top-2 sm:-top-3 -right-2 sm:-right-3 size-7 sm:size-8 bg-brand-blue rounded-full flex items-center justify-center text-white text-xs sm:text-sm font-bold border-[3px] sm:border-4 border-white z-10">2</span>
+                <span className="material-symbols-outlined text-3xl sm:text-4xl text-brand-blue/60 group-hover:text-brand-blue transition-colors">edit_note</span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold mb-2 text-slate-800">Add Details</h3>
+              <p className="text-xs sm:text-sm text-slate-500 px-2 sm:px-4 max-w-full">Set a price and write a description. Be honest about the condition.</p>
+            </div>
+            <div className="flex flex-col items-center text-center group w-full">
+              <div className="size-20 sm:size-24 rounded-xl sm:rounded-2xl bg-white border-2 border-slate-100 flex items-center justify-center mb-4 sm:mb-6 shadow-xl group-hover:border-brand-blue/50 group-hover:shadow-brand-blue/10 transition-all duration-500 relative touch-manipulation mx-auto">
+                <span className="absolute -top-2 sm:-top-3 -right-2 sm:-right-3 size-7 sm:size-8 bg-brand-blue rounded-full flex items-center justify-center text-white text-xs sm:text-sm font-bold border-[3px] sm:border-4 border-white z-10">3</span>
+                <span className="material-symbols-outlined text-3xl sm:text-4xl text-brand-blue/60 group-hover:text-brand-blue transition-colors">waving_hand</span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold mb-2 text-slate-800">Get Paid</h3>
+              <p className="text-xs sm:text-sm text-slate-500 px-2 sm:px-4 max-w-full">Chat with buyers, agree on a price, and get paid securely.</p>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* ================= PRICING SECTION ================= */}
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-brand-light border-y border-slate-200" id="pricing">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-3 sm:mb-4 text-brand-blue font-display">Choose Your Plan</h2>
+            <p className="text-sm sm:text-base text-slate-500">Scale your selling with our premium tools.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto items-stretch md:items-center">
+            <div className="bg-white border border-slate-200 rounded-xl sm:rounded-2xl p-6 sm:p-8 hover:-translate-y-2 transition-transform duration-300 shadow-sm flex flex-col">
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2">Basic</h3>
+              <p className="text-slate-400 text-xs sm:text-sm mb-4 sm:mb-6">For casual sellers</p>
+              <div className="text-3xl sm:text-4xl font-black text-brand-blue mb-4 sm:mb-6">Free</div>
+              <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 text-xs sm:text-sm text-slate-600 grow">
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-green-500 text-base sm:text-lg">check</span> Post 3 ads/month
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-green-500 text-base sm:text-lg">check</span> Standard visibility
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-green-500 text-base sm:text-lg">check</span> Basic support
+                </li>
+              </ul>
+              <button className="w-full py-2.5 sm:py-3 rounded-lg border border-brand-blue/20 text-brand-blue font-bold hover:bg-brand-blue/5 transition-colors touch-manipulation text-sm sm:text-base">Start Free</button>
+            </div>
+            <div className="bg-white border-2 border-brand-blue rounded-xl sm:rounded-2xl p-6 sm:p-8 transform md:scale-105 shadow-xl shadow-brand-blue/10 relative overflow-hidden flex flex-col">
+              <div className="absolute top-0 right-0 bg-brand-blue text-white text-[10px] sm:text-xs font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded-bl-lg">POPULAR</div>
+              <h3 className="text-xl sm:text-2xl font-bold text-brand-blue mb-2">Power Seller</h3>
+              <p className="text-brand-orange text-xs sm:text-sm mb-4 sm:mb-6">For serious merchants</p>
+              <div className="text-3xl sm:text-4xl font-black text-slate-900 mb-4 sm:mb-6">₦5,000<span className="text-base sm:text-lg font-normal text-slate-400">/mo</span></div>
+              <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 text-xs sm:text-sm text-slate-700 flex-grow">
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-brand-blue text-base sm:text-lg">check_circle</span> Unlimited ads
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-brand-blue text-base sm:text-lg">check_circle</span> 5x more visibility
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-brand-blue text-base sm:text-lg">check_circle</span> Verified Badge
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-brand-blue text-base sm:text-lg">check_circle</span> Priority Support
+                </li>
+              </ul>
+              <button className="w-full py-2.5 sm:py-3 rounded-lg bg-brand-blue hover:bg-brand-blue/90 text-white font-bold shadow-lg transition-colors touch-manipulation text-sm sm:text-base">Get Started</button>
+            </div>
+            <div className="bg-white border border-slate-200 rounded-xl sm:rounded-2xl p-6 sm:p-8 hover:-translate-y-2 transition-transform duration-300 shadow-sm flex flex-col">
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2">Business</h3>
+              <p className="text-slate-400 text-xs sm:text-sm mb-4 sm:mb-6">For large stores</p>
+              <div className="text-3xl sm:text-4xl font-black text-brand-blue mb-4 sm:mb-6">₦20,000<span className="text-base sm:text-lg font-normal text-slate-400">/mo</span></div>
+              <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 text-xs sm:text-sm text-slate-600 grow">
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-green-500 text-base sm:text-lg">check</span> Dedicated Storefront
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-green-500 text-base sm:text-lg">check</span> Advanced Analytics
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-green-500 text-base sm:text-lg">check</span> API Access
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-green-500 text-base sm:text-lg">check</span> Account Manager
+                </li>
+              </ul>
+              <button className="w-full py-2.5 sm:py-3 rounded-lg border border-brand-blue/20 text-brand-blue font-bold hover:bg-brand-blue/5 transition-colors touch-manipulation text-sm sm:text-base">Contact Sales</button>
+              </div>
+            </div>
+          </div>
+      </section>
+
+      {/* ================= NATIONWIDE COVERAGE ================= */}
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8 sm:gap-10 md:gap-12">
+          <div className="md:w-1/2 space-y-4 sm:space-y-6 w-full">
+            <span className="text-brand-orange font-bold tracking-wider uppercase text-xs sm:text-sm">Nationwide Coverage</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 font-display">Connecting Buyers <br className="hidden sm:block"/> Across Nigeria</h2>
+            <p className="text-sm sm:text-base md:text-lg text-slate-500">Whether you are in the hustle of Lagos or the hills of Enugu, WeSellAll bridges the gap between you and your next customer.</p>
+            <div className="flex flex-wrap gap-3 sm:gap-4 pt-2 sm:pt-4">
+              <div className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-lg bg-brand-light border border-slate-200">
+                <div className="text-xl sm:text-2xl font-bold text-brand-blue">36+</div>
+                <div className="text-[10px] sm:text-xs text-slate-500 font-semibold">States</div>
+              </div>
+              <div className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-lg bg-brand-light border border-slate-200">
+                <div className="text-xl sm:text-2xl font-bold text-brand-blue">2M+</div>
+                <div className="text-[10px] sm:text-xs text-slate-500 font-semibold">Users</div>
+              </div>
+              <div className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-lg bg-brand-light border border-slate-200">
+                <div className="text-xl sm:text-2xl font-bold text-brand-blue">500K+</div>
+                <div className="text-[10px] sm:text-xs text-slate-500 font-semibold">Listings</div>
+              </div>
+            </div>
+          </div>
+          <div className="md:w-1/2 relative h-[300px] sm:h-[350px] md:h-[400px] w-full bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-4 flex items-center justify-center overflow-hidden group border border-slate-100 shadow-xl">
+            <div className="absolute inset-0 bg-white"></div>
+                  <Image
+              alt="Map of Nigeria outline"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6RHEy09jFFu6DH2-WRj7FlZjr3PUa-YkeEogANzYXAbVdgnMhr6D73BX91sRQVV8voSUjPphP2qiAbWsejcd4U10J78tWEedTgdzGkknRGnbCc5V1Xd41iODwnmRyXxZOd5euH9oQjyzaeMUL9WoRsNGgMEjNiRVrUMbMN6FCA71Blz4y-FzV_H4wMkdx7F3lh1bHg9Q5olhixK-APBDEtnt1OtPxU2LA0t-XDyYXWfpLmLgScXPP26fLhm0eH1bVhEbgnNDK9Q"
+              fill
+              className="h-full w-auto object-contain opacity-20 transition-opacity duration-500"
+            />
+            <div className="absolute top-[65%] left-[20%] group/pin cursor-pointer z-10">
+              <div className="size-4 bg-brand-orange rounded-full animate-pulse shadow-lg shadow-brand-orange/30"></div>
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded shadow-lg opacity-0 group-hover/pin:opacity-100 transition-opacity whitespace-nowrap">
+                Lagos (800k+ Ads)
+              </div>
+            </div>
+            <div className="absolute top-[45%] left-[50%] group/pin cursor-pointer z-10">
+              <div className="size-4 bg-brand-blue rounded-full animate-pulse shadow-lg shadow-brand-blue/30"></div>
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded shadow-lg opacity-0 group-hover/pin:opacity-100 transition-opacity whitespace-nowrap">
+                Abuja (450k+ Ads)
+              </div>
+              </div>
+            <div className="absolute top-[75%] right-[30%] group/pin cursor-pointer z-10">
+              <div className="size-3 bg-slate-400 rounded-full shadow-md"></div>
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded shadow-lg opacity-0 group-hover/pin:opacity-100 transition-opacity whitespace-nowrap">
+                Port Harcourt
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ================= CTA SECTION ================= */}
-      <div className="bg-primary py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
-          <div className="mb-6 md:mb-0 text-center md:text-left">
-            <h2 className="text-3xl font-bold text-white mb-2">Have something to sell?</h2>
-            <p className="text-blue-200">Post your ad for free and reach millions of buyers in Nigeria.</p>
-        </div>
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-brand-light border-t border-slate-200 text-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 sm:mb-8 tracking-tighter text-brand-blue font-display px-2">Ready to Sell?</h2>
+          <p className="text-base sm:text-lg md:text-xl text-slate-500 mb-6 sm:mb-8 md:mb-10 px-4">Join thousands of Nigerians making money on WeSellAll today. It's free to get started.</p>
           <Link
             href="/register"
-            className="bg-secondary hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300"
+            className="bg-brand-orange hover:bg-brand-orange/90 text-white text-sm sm:text-base md:text-lg font-bold py-3 sm:py-4 px-8 sm:px-10 md:px-12 rounded-full transition-transform hover:scale-105 active:scale-95 shadow-xl shadow-brand-orange/20 inline-block touch-manipulation"
           >
-            Start Selling Now
+            Create Free Account
           </Link>
             </div>
-          </div>
+      </section>
     </div>
   );
 }
