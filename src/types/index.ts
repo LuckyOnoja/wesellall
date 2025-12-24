@@ -54,3 +54,23 @@ export interface RegistrationFormData {
   address: string;
   tier: SellerTier;
 }
+
+export interface PaymentConfig {
+  reference: string;
+  email: string;
+  amount: number;
+  publicKey: string;
+  currency: string;
+  channels: string[];
+  metadata: {
+    custom_fields: Array<{
+      display_name: string;
+      variable_name: string;
+      value: string;
+    }>;
+    cancel_action: string;
+  };
+  text: string;
+  onSuccess: (reference: any) => void;
+  onClose: () => void;
+}
