@@ -32,7 +32,7 @@ export default function RootLayout({
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
-      <body className="min-h-screen bg-white text-slate-900 font-display overflow-x-hidden">
+      <body className="min-h-screen bg-white text-brand-blue font-body overflow-x-hidden">
         <Providers>
           <LayoutShell>{children}</LayoutShell>
         </Providers>
