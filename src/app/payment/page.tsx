@@ -656,7 +656,7 @@ function PaymentPageContent() {
                 </ol>
               </div>
 
-              {/* Support */}
+              {/* Support Section */}
               <div className="mt-8 p-6 bg-blue-50 rounded-2xl border border-blue-200">
                 <h4 className="font-semibold text-lg mb-4 text-gray-900">Need Help?</h4>
                 <p className="text-gray-600 mb-4">
