@@ -4,6 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import ad2 from './assets/images/ad-2.jpeg';
+import ad3 from './assets/images/ad-3.jpeg';
+import ad4 from './assets/images/ad-4.jpeg';
 
 export default function Home() {
   const router = useRouter();
@@ -150,40 +153,61 @@ export default function Home() {
       <section className="py-8 bg-white border-t border-slate-100">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[400px]">
-            <div className="md:col-span-4 h-[300px] md:h-full bg-brand-light border border-slate-200 rounded-xl overflow-hidden relative group">
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-brand-blue/10"></div>
-              <div className="absolute top-4 left-4 z-10">
+            <div className="md:col-span-4 h-[300px] md:h-full bg-brand-light border border-slate-200 rounded-xl overflow-hidden relative group cursor-pointer">
+              <Image
+                src={ad2}
+                alt="Targeted Ad"
+                fill
+                className="object-cover transition-all duration-500"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+              <div className="absolute top-4 left-4 z-20 transition-all duration-300">
                 <span className="bg-brand-orange text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">Targeted Ad</span>
               </div>
-              <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6 z-10">
-                <h3 className="text-2xl font-bold text-brand-blue mb-2">Grow Your Business</h3>
-                <p className="text-brand-blue/70 mb-6">Reach millions of customers across Nigeria instantly.</p>
-                <button className="bg-brand-blue text-white px-6 py-2 rounded-lg font-bold hover:bg-brand-blue/90">Advertise Here</button>
+              <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out flex flex-col justify-center items-center text-center p-6 z-10">
+                <h3 className="text-2xl font-bold text-white mb-2 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">Grow Your Business</h3>
+                <p className="text-white/90 mb-6 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">Reach millions of customers across Nigeria instantly.</p>
+                <button className="bg-brand-orange text-white px-6 py-2 rounded-lg font-bold hover:bg-brand-orange/90 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 delay-300">Advertise Here</button>
               </div>
-              <div className="absolute -bottom-10 -right-10 text-9xl text-brand-blue/5 font-black rotate-12 select-none">AD</div>
             </div>
             <div className="md:col-span-8 grid grid-rows-2 gap-6 h-full">
-              <div className="bg-white border border-slate-200 rounded-xl overflow-hidden relative h-[200px] md:h-auto flex items-center justify-between p-8">
-                <div className="relative z-10 max-w-md">
-                  <div className="absolute top-4 left-4 z-20">
-                    <span className="bg-brand-orange text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">Seasonal Offer</span>
-                  </div>
-                  <div className="mt-12">
-                    <h3 className="text-3xl font-black text-brand-blue mb-2 font-display">Merry Christmas</h3>
-                    <p className="text-brand-blue/70">Big discounts on electronics this season.</p>
-                  </div>
+              <div className="bg-white border border-slate-200 rounded-xl overflow-hidden relative h-[200px] md:h-auto flex items-center justify-between p-8 group cursor-pointer">
+                <Image
+                  src={ad3}
+                  alt="Seasonal Offer"
+                  fill
+                  className="object-cover transition-all duration-500"
+                  sizes="(max-width: 768px) 100vw, 66vw"
+                />
+                <div className="absolute top-4 left-4 z-20 transition-all duration-300">
+                  <span className="bg-brand-orange text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">Seasonal Offer</span>
                 </div>
-                <div className="hidden md:block">
-                  <span className="material-symbols-outlined text-8xl text-brand-orange/20 rotate-12">celebration</span>
+                <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out flex items-center justify-between p-8 z-10">
+                  <div className="max-w-md transform translate-x-[-20px] group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+                    <h3 className="text-3xl font-black text-white mb-2 font-display">Merry Christmas</h3>
+                    <p className="text-white/90">Big discounts on electronics this season.</p>
+                  </div>
+                  <div className="hidden md:block transform translate-x-[20px] group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+                    <span className="material-symbols-outlined text-8xl text-white/30 rotate-12">celebration</span>
+                  </div>
                 </div>
               </div>
-              <div className="bg-white border border-slate-200 rounded-xl overflow-hidden relative h-[200px] md:h-auto flex items-center justify-center p-8 text-center">
-                <div className="relative z-10">
-                  <h3 className="text-xl font-bold text-brand-blue mb-2">Sell Faster with Premium</h3>
-                  <p className="text-brand-blue/70 mb-4">Get up to 10x more views on your listings.</p>
-                  <Link href="#" className="text-brand-orange font-bold hover:underline flex items-center justify-center gap-1">
-                    Learn More <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                  </Link>
+              <div className="bg-white border border-slate-200 rounded-xl overflow-hidden relative h-[200px] md:h-auto flex items-center justify-center p-8 text-center group cursor-pointer">
+                <Image
+                  src={ad4}
+                  alt="Premium Feature"
+                  fill
+                  className="object-cover transition-all duration-500"
+                  sizes="(max-width: 768px) 100vw, 66vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out flex items-center justify-center p-8 z-10">
+                  <div className="transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+                    <h3 className="text-xl font-bold text-white mb-2">Sell Faster with Premium</h3>
+                    <p className="text-white/90 mb-4">Get up to 10x more views on your listings.</p>
+                    <Link href="#" className="text-brand-orange font-bold hover:underline flex items-center justify-center gap-1 transition-all duration-300">
+                      Learn More <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
