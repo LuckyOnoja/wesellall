@@ -16,7 +16,7 @@ function PaymentCallbackContent() {
     const paymentReference = reference || trxref;
 
     if (status === 'success' && paymentReference) {
-      // Store in localStorage for the payment page to detect
+      // Store in localStorage for the payment page to find
       localStorage.setItem('payment_complete', JSON.stringify({
         reference: paymentReference,
         timestamp: new Date().toISOString()
