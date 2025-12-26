@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   Facebook, 
   Twitter, 
@@ -14,6 +15,7 @@ import {
   Download,
   Globe
 } from 'lucide-react';
+import wLogo from '@/app/assets/images/w-logo.png';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -57,9 +59,13 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-brand-blue to-brand-blue rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-2xl">W</span>
-              </div>
+              <Image 
+                src={wLogo}
+                alt="WeSellAll Logo"
+                height={80}
+                width={300}
+                className="h-20 md:h-24 w-auto"
+              />
               <div>
                 <span className="text-2xl font-bold text-white">WeSellAll</span>
                 <p className="text-white text-sm">Nigeria's Trusted Marketplace</p>

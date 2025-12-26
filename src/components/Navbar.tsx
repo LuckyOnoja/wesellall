@@ -1,9 +1,11 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { ShoppingCart, User, Menu, X, Bell, Search, TrendingUp, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import wLogo from '@/app/assets/images/w-logo.png';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,10 +42,12 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <img 
-                src="/logo.png"  
+              <Image 
+                src={wLogo}
                 alt="WeSellAll Logo"
-                className="h-8"
+                height={64}
+                width={240}
+                className="h-16 md:h-20 w-auto"
               />
             </Link>
           </div>

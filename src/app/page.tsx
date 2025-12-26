@@ -126,23 +126,23 @@ export default function Home() {
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-bold text-brand-blue uppercase font-display tracking-tight">Marketplace for Nigeria by Nigeria</h2>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-8 gap-3">
             {categories.map((cat) => (
               <Link
                 key={cat.name}
                 href={`/categories?cat=${encodeURIComponent(cat.name.toLowerCase())}`}
-                className="group bg-white hover:bg-brand-light border border-slate-200 hover:border-brand-blue rounded-xl p-3 flex flex-col items-center text-center gap-3 transition-all duration-300 hover:shadow-lg hover:shadow-brand-blue/10 hover:-translate-y-1"
+                className="group bg-white hover:bg-brand-light border border-slate-200 hover:border-brand-blue rounded-lg p-2 flex flex-col items-center text-center gap-2 transition-all duration-300 hover:shadow-md hover:shadow-brand-blue/10 hover:-translate-y-1"
               >
-                <div className="w-full aspect-[4/3] rounded-lg overflow-hidden bg-slate-50 relative">
+                <div className="w-full aspect-square rounded-md overflow-hidden bg-slate-50 relative">
                   <Image
                     alt={cat.name}
                     src={cat.image}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
+                    sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 20vw, 12vw"
                   />
                 </div>
-                <span className="text-sm font-bold text-brand-blue leading-tight group-hover:text-brand-orange transition-colors">{cat.name}</span>
+                <span className="text-xs font-bold text-brand-blue leading-tight group-hover:text-brand-orange transition-colors">{cat.name}</span>
               </Link>
             ))}
           </div>
@@ -224,7 +224,7 @@ export default function Home() {
               Premium Ads
             </h2>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3">
             {premiumAds.map((ad, idx) => (
               <div key={idx} className="bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-lg hover:border-brand-blue/30 transition-all group">
                 <div className="relative aspect-square bg-slate-100">
@@ -233,15 +233,15 @@ export default function Home() {
                     src={ad.image}
                     fill
                     className="w-full h-full object-cover"
-                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                    sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 20vw, 14vw"
                   />
-                  <span className="absolute top-2 left-2 bg-brand-orange text-white text-[10px] font-bold px-2 py-0.5 rounded">PREMIUM</span>
+                  <span className="absolute top-1 left-1 bg-brand-orange text-white text-[9px] font-bold px-1.5 py-0.5 rounded">PREMIUM</span>
                 </div>
-                <div className="p-3">
-                  <h3 className="font-bold text-brand-blue truncate text-sm">{ad.title}</h3>
-                  <p className="text-brand-orange font-bold text-sm mt-1">{ad.price}</p>
-                  <p className="text-xs text-brand-blue/60 mt-1 flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[10px]">location_on</span>
+                <div className="p-2">
+                  <h3 className="font-bold text-brand-blue truncate text-xs">{ad.title}</h3>
+                  <p className="text-brand-orange font-bold text-xs mt-0.5">{ad.price}</p>
+                  <p className="text-[10px] text-brand-blue/60 mt-0.5 flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[9px]">location_on</span>
                     {ad.location}
                   </p>
                 </div>
@@ -257,7 +257,7 @@ export default function Home() {
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-bold text-brand-blue">Fresh Recommendations</h2>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3">
             {freshRecommendations.map((item, idx) => (
               <div key={idx} className="bg-white border border-slate-100 rounded-lg overflow-hidden hover:shadow hover:border-brand-blue/20 transition-all group">
                 <div className="relative aspect-square bg-slate-50">
@@ -266,16 +266,16 @@ export default function Home() {
                     src={item.image}
                     fill
                     className="object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                    sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 20vw, 14vw"
                   />
                   {item.sold && (
                     <span className="absolute top-0 right-0 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-bl">SOLD</span>
                   )}
                 </div>
-                <div className={`p-3 ${item.sold ? 'opacity-60' : ''}`}>
-                  <h3 className="font-medium text-brand-blue truncate text-sm">{item.title}</h3>
-                  <p className="text-brand-blue font-bold text-sm mt-1">{item.price}</p>
-                  <p className="text-xs text-brand-blue/50 mt-1">{item.location}</p>
+                <div className={`p-2 ${item.sold ? 'opacity-60' : ''}`}>
+                  <h3 className="font-medium text-brand-blue truncate text-xs">{item.title}</h3>
+                  <p className="text-brand-blue font-bold text-xs mt-0.5">{item.price}</p>
+                  <p className="text-[10px] text-brand-blue/50 mt-0.5">{item.location}</p>
                 </div>
               </div>
             ))}
