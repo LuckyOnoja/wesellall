@@ -34,7 +34,7 @@ export default function Navbar() {
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled 
           ? 'bg-white shadow-md py-3' 
-          : 'bg-white/95 py-4'
+          : 'bg-white/95 py-2'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,7 +47,7 @@ export default function Navbar() {
                 alt="WeSellAll Logo"
                 height={64}
                 width={240}
-                className="h-16 md:h-20 w-auto"
+                className="h-24 md:h-20 w-auto"
               />
             </Link>
           </div>
