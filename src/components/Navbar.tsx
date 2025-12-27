@@ -47,7 +47,7 @@ export default function Navbar() {
                 alt="WeSellAll Logo"
                 height={64}
                 width={240}
-                className="h-24 md:h-20 w-auto"
+                className="h-24 md:h-26 w-auto"
               />
             </Link>
           </div>
