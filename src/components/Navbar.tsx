@@ -39,9 +39,9 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
+          {/* Logo and Buy Direct */}
+          <div className="flex items-center gap-0.5 mr-6 md:mr-8">
+            <Link href="/" className="flex items-center">
               <Image 
                 src={wLogo}
                 alt="WeSellAll Logo"
@@ -49,6 +49,12 @@ export default function Navbar() {
                 width={240}
                 className="h-24 md:h-26 w-auto"
               />
+            </Link>
+            <Link 
+              href="/products?premium=true" 
+              className="text-brand-orange font-bold text-sm md:text-base uppercase tracking-wide hover:text-brand-orange/80 transition-colors whitespace-nowrap -ml-1"
+            >
+              Buy Direct
             </Link>
           </div>
 
