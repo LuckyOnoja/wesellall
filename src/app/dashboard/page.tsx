@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import wLogo from '@/app/assets/images/w-logo.png';
 
 export default function Dashboard() {
   const [activeSidebarLink, setActiveSidebarLink] = useState('overview');
@@ -126,14 +128,15 @@ export default function Dashboard() {
           <button className="lg:hidden p-1 hover:text-primary transition-colors">
             <span className="material-symbols-outlined">menu</span>
           </button>
-          <Link href="/" className="flex items-center gap-2">
-            <div className="size-8 rounded-lg bg-primary flex items-center justify-center text-white shadow-[0_0_15px_rgba(255,105,51,0.4)]">
-              <span className="material-symbols-outlined text-[20px]">shopping_bag</span>
-            </div>
-            <span className="text-xl font-bold tracking-tight font-display hidden sm:block">
-              WeSellAll <span className="text-xs font-normal text-white/50 ml-1">Seller Hub</span>
-            </span>
-          </Link>
+          <Link href="/" className="flex items-center space-x-2">
+              <Image 
+                src={wLogo}
+                alt="WeSellAll Logo"
+                height={64}
+                width={240}
+                className="h-16 md:h-20 w-auto"
+              />
+            </Link>
         </div>
         <div className="flex items-center gap-4">
           <button className="relative p-2 text-white/70 hover:text-white transition-colors">
