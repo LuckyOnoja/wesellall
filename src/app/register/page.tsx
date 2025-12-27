@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, Suspense } from "react";
+import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useSearchParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import wLogo from '@/app/assets/images/w-logo.png';
 
 const registrationSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -238,16 +240,18 @@ function RegistrationPageContent() {
         {/* Left Column - Form */}
         <div className="w-full lg:w-7/12 xl:w-1/2 h-full flex flex-col p-6 lg:p-12 overflow-y-auto scrollbar-hide">
           <header className="flex items-center justify-between mb-8">
-            <Link href="/" className="flex items-center gap-2 cursor-pointer">
-              <div className="size-8 rounded-lg bg-primary flex items-center justify-center text-white">
-                <span className="material-symbols-outlined text-[20px]">
-                  shopping_bag
-                </span>
-              </div>
-              <span className="text-xl font-bold font-display tracking-tight">
-                WeSellAll
-              </span>
+              {/* Logo */}
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center space-x-2">
+              <Image 
+                src={wLogo}
+                alt="WeSellAll Logo"
+                height={64}
+                width={240}
+                className="h-16 md:h-20 w-auto"
+              />
             </Link>
+          </div>
             <Link
               className="text-sm text-white/60 hover:text-primary transition-colors"
               href="#"
